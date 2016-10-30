@@ -11,18 +11,17 @@ export const fetchCards = () => {
         dispatch({
             type: FETCHING_CARDS
         });
-        const dispatchCards = (snapshot)=> {
-            dispatch({
-                type: FETCHED_CARDS,
-                payload: {
-                    cards: snapshot.val().map((card)=>(card)),
-                },
-            })
-        };
-        Firebase.database().ref('cards').on('value', dispatchCards);
         Firebase.database().ref('cards').once('value')
-            .then(dispatchCards)
+            .then((snapshot)=> {
+                dispatch({
+                    type: FETCHED_CARDS,
+                    payload: {
+                        cards: snapshot.val().map((card)=>(card)),
+                    }
+                })
+            })
             .catch((err) => {
+                console.log(err);
                 return null;
             });
     }

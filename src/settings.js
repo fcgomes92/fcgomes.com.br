@@ -33,7 +33,7 @@ export const theme = getMuiTheme({
     },
 });
 
-import {initializeApp, auth} from 'firebase';
+import {initializeApp} from 'firebase';
 
 const FIREBASE_CONFIG = {
     apiKey: "AIzaSyDLDSbImu46aQQsxs7M8YYB6UsseT3Z2dU",

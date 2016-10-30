@@ -21,11 +21,9 @@ class Cards extends Component {
         if (!this.props.cards) {
             return null;
         }
-
         const styleCard = {
             marginBottom: "2em"
         };
-        var counter = 0;
         const {cards} = this.props;
         return cards.map((card)=> (
                 <div className="three columns" key={card.id} style={styleCard}>
