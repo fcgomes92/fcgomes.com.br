@@ -32,14 +32,3 @@ export const theme = getMuiTheme({
         shadowColor: fullBlack,
     },
 });
-
-import {initializeApp} from 'firebase';
-
-const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyDLDSbImu46aQQsxs7M8YYB6UsseT3Z2dU",
-    authDomain: "backend-example.firebaseapp.com",
-    databaseURL: "https://backend-example.firebaseio.com",
-    storageBucket: "backend-example.appspot.com",
-    messagingSenderId: "767591657518"
-};
-export const Firebase = initializeApp(FIREBASE_CONFIG);
