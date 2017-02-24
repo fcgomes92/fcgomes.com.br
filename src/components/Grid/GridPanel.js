@@ -1,15 +1,14 @@
 /**
  * Created by gomes on 22/02/17.
  */
-/**
- * Created by gomes on 22/02/17.
- */
 import React, {Component, PropTypes} from 'react';
 
 class GridPanel extends Component {
     static propTypes = {
-        x: PropTypes.string,
-        y: PropTypes.string,
+        x: PropTypes.number,
+        y: PropTypes.number,
+        name: PropTypes.string,
+        nameOverlayStyle: PropTypes.object,
         defaultNavigation: PropTypes.bool,
         children: PropTypes.node,
     };
@@ -17,6 +16,8 @@ class GridPanel extends Component {
     static defaultProps = {
         x: 0,
         y: 0,
+        name: '',
+        nameOverlayStyle: {},
         defaultNavigation: false,
     };
 
@@ -42,7 +43,7 @@ class GridPanel extends Component {
     }
 
     render() {
-        const {x, y, children} = this.props;
+        const {x, y, name, nameOverlayStyle, children} = this.props;
         const styles = {
             panel: {
                 left: `${x}00%`,
@@ -51,6 +52,7 @@ class GridPanel extends Component {
         };
         return (
             <div className="panel" data-x-pos={x} data-y-pos={y} style={styles.panel}>
+                <span className="_panel-wrapper-name" style={nameOverlayStyle} data-x-pos={x} data-y-pos={y}>{name}</span>
                 {this.renderNav()}
                 {children}
             </div>

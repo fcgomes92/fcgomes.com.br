@@ -1,0 +1,16 @@
+$blue-500: #2196F3;
+
+body {
+  font-family: 'Raleway', 'Roboto', sans-serif;
+}
+
+a {
+  &.white-link {
+    color: #FFF;
+    text-decoration: none;
+    &:hover, &:active, &:link, &:visited {
+      color: $blue-500;
+      text-decoration: none;
+    }
+  }
+}

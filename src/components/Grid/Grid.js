@@ -8,6 +8,7 @@ import {hasClass, addClass, removeClass} from './util';
 const CLASS_SITE_WRAP = 'site-wrap',
     CLASS_PANEL_WRAP = 'panel-wrap',
     CLASS_PANEL = 'panel',
+    CLASS_PANEL_NAME = '_panel-wrapper-name',
     CLASS_ZOOM = 'js-zoom',
     CLASS_UP = 'js-up',
     CLASS_DOWN = 'js-down',
@@ -45,7 +46,8 @@ export {DATA_X_POS, DATA_Y_POS, DATA_X_TO, DATA_Y_TO}
 let site = document.getElementsByClassName(CLASS_SITE_WRAP)[0];
 let wrap = document.getElementsByClassName(CLASS_PANEL_WRAP)[0];
 
-let panel = document.getElementsByClassName(CLASS_PANEL);
+let panel = document.getElementsByClassName(CLASS_PANEL),
+    panelName = document.getElementsByClassName(CLASS_PANEL_NAME);
 
 let zoom = document.getElementsByClassName(CLASS_ZOOM);
 
@@ -86,11 +88,14 @@ class Grid extends Component {
         this.moveTo = this.moveTo.bind(this);
         this.zoomIn = this.zoomIn.bind(this);
         this.zoomOut = this.zoomOut.bind(this);
+        this.center = this.center.bind(this);
         this.setPanelAndZoom = this.setPanelAndZoom.bind(this);
     }
 
     setXY(x, y) {
-        this.setState({x, y});
+        this.setState({
+            x: parseInt(x), y: parseInt(y),
+        });
     }
 
     incrementX() {
@@ -148,6 +153,9 @@ class Grid extends Component {
         for (let x = 0; x < panel.length; x++) {
             panel[x].addEventListener('click', this.setPanelAndZoom);
         }
+        for (let x = 0; x < panelName.length; x++) {
+            panelName[x].addEventListener('click', this.setPanelAndZoom);
+        }
     }
 
     setPanelAndZoom(e) {
@@ -160,15 +168,21 @@ class Grid extends Component {
         for (let x = 0; x < panel.length; x++) {
             panel[x].removeEventListener('click', this.setPanelAndZoom);
         }
+        for (let x = 0; x < panelName.length; x++) {
+            panelName[x].removeEventListener('click', this.setPanelAndZoom);
+        }
+
         removeClass(site, CLASS_SHOW_ALL);
     }
 
     center() {
+        addClass(wrap, 'animate');
         this.setXY(this.props.startX, this.props.startY);
         this.setPos();
     }
 
     moveTo(e) {
+        addClass(wrap, 'animate');
         this.setXY(-e.target.getAttribute(DATA_X_TO), e.target.getAttribute(DATA_Y_TO));
         this.setPos();
     }
@@ -177,6 +191,7 @@ class Grid extends Component {
         site = document.getElementsByClassName(CLASS_SITE_WRAP)[0];
         wrap = document.getElementsByClassName(CLASS_PANEL_WRAP)[0];
         panel = document.getElementsByClassName(CLASS_PANEL);
+        panelName = document.getElementsByClassName(CLASS_PANEL_NAME);
         zoom = document.getElementsByClassName(CLASS_ZOOM);
         nav_up = document.getElementsByClassName(CLASS_UP);
         nav_left = document.getElementsByClassName(CLASS_LEFT);

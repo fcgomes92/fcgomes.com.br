@@ -3,9 +3,9 @@
  */
 // theme settings
 import {
-    blueGrey500, blueGrey700,
-    pinkA200,
-    grey100, grey300, grey400, grey500,
+    blueGrey500, blueGrey300, blueGrey700,
+    blue500, blue300, blue700,
+    grey300,
     white, darkBlack, fullBlack,
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
@@ -17,11 +17,11 @@ export const theme = getMuiTheme({
     fontFamily: 'Roboto, sans-serif',
     palette: {
         primary1Color: blueGrey500,
-        primary2Color: blueGrey700,
-        primary3Color: grey400,
-        accent1Color: pinkA200,
-        accent2Color: grey100,
-        accent3Color: grey500,
+        primary2Color: blueGrey300,
+        primary3Color: blueGrey700,
+        accent1Color: blue500,
+        accent2Color: blue300,
+        accent3Color: blue700,
         textColor: darkBlack,
         alternateTextColor: white,
         canvasColor: white,

@@ -31,11 +31,16 @@ class Nav extends Component {
         type: PropTypes.oneOf([UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT, GRID, STARTER, TO,]),
         xTo: PropTypes.number,
         yTo: PropTypes.number,
-        children: PropTypes.element.isRequired
+        style: PropTypes.object,
+        children: PropTypes.element,
+    };
+
+    static defaultProps = {
+        style: {},
     };
 
     render() {
-        const {type, children} = this.props;
+        const {type, children, style} = this.props;
         let className = '';
         let new_props = {};
         if (type === UP) {
@@ -63,15 +68,24 @@ class Nav extends Component {
             className = CLASS_TO;
             new_props[DATA_X_TO] = xTo;
             new_props[DATA_Y_TO] = yTo;
-            new_props.className = className;
-            return React.cloneElement(children, new_props);
         } else {
             className = '';
         }
-        new_props.className = className;
-        return React.cloneElement(children, {
-            className,
-        });
+
+        Object.assign(new_props, children.props);
+
+        if (children.props.style) {
+            Object.assign(new_props.style, children.props.style, style);
+        } else {
+            new_props.style = style;
+        }
+
+        if (!new_props.className) {
+            new_props.className = '';
+        }
+        new_props.className = new_props.className.concat(` ${className}`).trim();
+
+        return React.cloneElement(children, new_props);
     }
 }
 
