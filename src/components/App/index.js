@@ -76,7 +76,7 @@ class App extends Component {
                         <div style={styles.wrapperDiv}>
                             <div style={styles.welcomeTitle}>
                                 <div className="row" style={styles.welcomeTitleBanner}>
-                                    <h1>{s.strings.app.welcomeTitle}</h1>
+                                    <h1>{s.strings.app.welcomeTitle.toUpperCase()}</h1>
                                     <span>FCGOMES.COM.BR</span>
                                 </div>
 
@@ -104,13 +104,8 @@ class App extends Component {
                                 <FlatButton style={styles.upButton} label={'PREVIOUS'} secondary={true}/>
                             </Nav>
                             <div style={styles.about}>
-                                <p>This is my (<a href="https://github.com/fcgomes92" target="_blank">@fcgomes92</a>) personal website where you can find things like my portifolio, my contacts and a little about me.
-                                </p>
-                                <p>The whole site is built using
-                                    <a href="https://facebook.github.io/react/" target="_blank">React</a> and
-                                    <a href="http://www.material-ui.com/" target="_blank">Material-UI</a>. The 'grid' component, that makes the site look like this, was inspired by
-                                    <a href="http://codepen.io/bradarnett/pen/dNEbzB" target="_blank">bradarnett</a>.
-                                </p>
+                                <p>This is my (<a href="https://github.com/fcgomes92" target="_blank">@fcgomes92</a>) personal website where you can find things like my portifolio, my contacts and a little about me.</p>
+                                <p>The whole site is built using <a href="https://facebook.github.io/react/" target="_blank">React</a> and <a href="http://www.material-ui.com/" target="_blank">Material-UI</a>. The 'grid' component, that makes the site look like this, was inspired by <a href="http://codepen.io/bradarnett/pen/dNEbzB" target="_blank">bradarnett</a>.</p>
                                 <p>Besides some information about myself, this site contains some experiments using web technologies.</p>
                                 <p style={{textAlign: 'center'}}>Hope you have fun. (:</p>
                             </div>
@@ -118,11 +113,11 @@ class App extends Component {
                                 <Nav type="grid">
                                     <FlatButton label={'Grid'} secondary={true}/>
                                 </Nav>
-                                <Nav type="starter">
-                                    <FlatButton label={'Home'} secondary={true}/>
-                                </Nav>
                                 <Nav type="down">
                                     <FlatButton label={s.strings.app.next} secondary={true}/>
+                                </Nav>
+                                <Nav type="starter">
+                                    <FlatButton label={'Home'} secondary={true}/>
                                 </Nav>
                             </div>
                         </div>
@@ -186,11 +181,11 @@ class App extends Component {
                                 <Nav type="grid">
                                     <FlatButton label={'Grid'} secondary={true}/>
                                 </Nav>
-                                <Nav type="starter">
-                                    <FlatButton label={'Home'} secondary={true}/>
-                                </Nav>
                                 <Nav type="down">
                                     <FlatButton label={s.strings.app.next} secondary={true}/>
+                                </Nav>
+                                <Nav type="starter">
+                                    <FlatButton label={'Home'} secondary={true}/>
                                 </Nav>
                             </div>
                         </div>
