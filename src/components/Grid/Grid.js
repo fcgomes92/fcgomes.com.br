@@ -40,7 +40,7 @@ const DATA_X_POS = 'data-x-pos',
     DATA_X_TO = 'data-x-to',
     DATA_Y_TO = 'data-y-to';
 
-export {DATA_X_POS, DATA_Y_POS, DATA_X_TO, DATA_Y_TO}
+export {DATA_X_POS, DATA_Y_POS, DATA_X_TO, DATA_Y_TO};
 
 // Elements
 let site = document.getElementsByClassName(CLASS_SITE_WRAP)[0];
@@ -65,6 +65,7 @@ class Grid extends Component {
     static propTypes = {
         startX: PropTypes.number,
         startY: PropTypes.number,
+        onRef: PropTypes.func,
         animation: PropTypes.oneOf(['none', 'shrink']),
         children: PropTypes.node,
     };
@@ -85,6 +86,7 @@ class Grid extends Component {
         this.moveUp = this.moveUp.bind(this);
         this.moveRight = this.moveRight.bind(this);
         this.moveLeft = this.moveLeft.bind(this);
+        this._moveTo = this._moveTo.bind(this);
         this.moveTo = this.moveTo.bind(this);
         this.zoomIn = this.zoomIn.bind(this);
         this.zoomOut = this.zoomOut.bind(this);
@@ -92,29 +94,29 @@ class Grid extends Component {
         this.setPanelAndZoom = this.setPanelAndZoom.bind(this);
     }
 
-    setXY(x, y) {
+    setXY(x, y, callback) {
         this.setState({
             x: parseInt(x), y: parseInt(y),
-        });
+        }, callback);
     }
 
-    incrementX() {
-        this.setState({x: this.state.x + 1});
+    incrementX(callback) {
+        this.setState({x: this.state.x + 1}, callback);
     }
 
-    decrementX() {
-        this.setState({x: this.state.x - 1});
+    decrementX(callback) {
+        this.setState({x: this.state.x - 1}, callback);
     }
 
-    incrementY() {
-        this.setState({y: this.state.y + 1});
+    incrementY(callback) {
+        this.setState({y: this.state.y + 1}, callback);
     }
 
-    decrementY() {
-        this.setState({y: this.state.y - 1});
+    decrementY(callback) {
+        this.setState({y: this.state.y - 1}, callback);
     }
 
-    setPos(time = 250) {
+    _setPos(time = 250) {
         const {x, y} = this.state;
         wrap.style.transform = 'translateX(' + x + '00%) translateY(' + y + '00%)';
         wrap.style.transitionDuration = `${time}ms`;
@@ -125,26 +127,22 @@ class Grid extends Component {
 
     moveUp() {
         addClass(wrap, 'animate');
-        this.incrementY();
-        this.setPos();
+        this.incrementY(this._setPos);
     }
 
     moveLeft() {
         addClass(wrap, 'animate');
-        this.incrementX();
-        this.setPos();
+        this.incrementX(this._setPos);
     }
 
     moveRight() {
         addClass(wrap, 'animate');
-        this.decrementX();
-        this.setPos();
+        this.decrementX(this._setPos);
     }
 
     moveDown() {
         addClass(wrap, 'animate');
-        this.decrementY();
-        this.setPos();
+        this.decrementY(this._setPos);
     }
 
     zoomOut(e) {
@@ -159,8 +157,7 @@ class Grid extends Component {
     }
 
     setPanelAndZoom(e) {
-        this.setXY(-e.target.getAttribute(DATA_X_POS), e.target.getAttribute(DATA_Y_POS));
-        this.setPos(400);
+        this.setXY(-e.target.getAttribute(DATA_X_POS), e.target.getAttribute(DATA_Y_POS), this._setPos);
         this.zoomIn();
     }
 
@@ -177,14 +174,17 @@ class Grid extends Component {
 
     center() {
         addClass(wrap, 'animate');
-        this.setXY(this.props.startX, this.props.startY);
-        this.setPos();
+        this.setXY(this.props.startX, this.props.startY, this._setPos);
     }
 
-    moveTo(e) {
+    _moveTo(e) {
         addClass(wrap, 'animate');
-        this.setXY(-e.target.getAttribute(DATA_X_TO), e.target.getAttribute(DATA_Y_TO));
-        this.setPos();
+        this.setXY(-e.target.getAttribute(DATA_X_TO), e.target.getAttribute(DATA_Y_TO), this._setPos);
+    }
+
+    moveTo(x, y) {
+        addClass(wrap, 'animate');
+        this.setXY(-x, y, this._setPos);
     }
 
     componentDidMount() {
@@ -201,7 +201,9 @@ class Grid extends Component {
         jsCenter = document.getElementsByClassName(CLASS_STARTER);
         animation = document.getElementsByClassName(CLASS_ANIMATION);
 
-        this.setPos();
+        this.props.onRef(this);
+
+        this._setPos();
 
         for (let x = 0; x < nav_up.length; x++) {
             nav_up[x].addEventListener('click', this.moveUp);
@@ -228,7 +230,7 @@ class Grid extends Component {
         }
 
         for (let x = 0; x < nav_to.length; x++) {
-            nav_to[x].addEventListener('click', this.moveTo);
+            nav_to[x].addEventListener('click', this._moveTo);
         }
     }
 

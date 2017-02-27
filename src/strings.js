@@ -8,6 +8,7 @@ class _Strings {
     strings = {
         app: {
             readMoreButton: 'Read More',
+            previous: 'Previous',
             next: 'Next',
             welcomeTitle: 'Welcome!',
         }
