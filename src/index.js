@@ -1,23 +1,24 @@
-/**
- * Created by gomes on 16/10/16.
- */
 import React from 'react';
 import {render} from 'react-dom';
-import {browserHistory} from 'react-router';
-import {syncHistoryWithStore} from 'react-router-redux';
-import Root from './containers/Root';
-import configureStore from './store/configureStore';
-// import injectTapEventPlugin from 'react-tap-event-plugin';
 
-// fetch preloaded state
-// fetch i18n strings
+import {I18nextProvider} from 'react-i18next';
 
-const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
-
-// injectTapEventPlugin();
+import App from './components/App/AppComponent';
+import i18n from './i18n';
+import registerServiceWorker from './registerServiceWorker';
 
 render(
-    <Root store={store} history={history}/>,
-    document.getElementById('root')
+    <I18nextProvider i18n={i18n}><App/></I18nextProvider>,
+    document.getElementById('root'),
+    () => {
+        let splashScreen = document.getElementById("splashScreen");
+        if (splashScreen) {
+            splashScreen.style.opacity = 0;
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+            }, 250)
+        }
+    }
 );
+
+registerServiceWorker();
