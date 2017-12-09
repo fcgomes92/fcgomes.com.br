@@ -1,0 +1,62 @@
+/**
+ * Retrieves a color value from the $material-colors Sass map
+ * Inspired by https://github.com/nilskaspersson/Google-Material-UI-Color-Palette/
+ *
+ * @function
+ * @param {string} color-name             - quoted, lower-case, dasherized color
+ *                                          name (e.g. 'pink', 'amber')
+ * @param {string} [color-variant='500']  - quoted, lowercase color variant (e.g.
+ *                                          '200', 'a100')
+ */
+/**
+ * Retrieves a color value from the $material-colors Sass map
+ * Inspired by https://github.com/nilskaspersson/Google-Material-UI-Color-Palette/
+ *
+ * @function
+ * @param {string} color-name             - quoted, lower-case, dasherized color
+ *                                          name (e.g. 'pink', 'amber')
+ * @param {string} [color-variant='500']  - quoted, lowercase color variant (e.g.
+ *                                          '200', 'a100')
+ */
+html, body, #root {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background: #212121; }
+
+@media (min-width: 42em) {
+  main {
+    height: 100%; } }
+
+.full-height {
+  min-height: 55em; }
+  @media (min-height: 32em) {
+    .full-height {
+      min-height: 100vh; } }
+
+/**
+ * Retrieves a color value from the $material-colors Sass map
+ * Inspired by https://github.com/nilskaspersson/Google-Material-UI-Color-Palette/
+ *
+ * @function
+ * @param {string} color-name             - quoted, lower-case, dasherized color
+ *                                          name (e.g. 'pink', 'amber')
+ * @param {string} [color-variant='500']  - quoted, lowercase color variant (e.g.
+ *                                          '200', 'a100')
+ */
+.link {
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: .65;
+  transition: opacity 250ms ease; }
+  .link:hover, .link:active, .link:focus {
+    text-decoration: none;
+    opacity: 1; }
+  .link--primary, .link--white {
+    color: #ffffff; }
+  .link--accent, .link--black {
+    color: #000000; }

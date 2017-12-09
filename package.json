@@ -12,6 +12,7 @@
   "author": "Fernando Gomes <fcgomes.92@gmail.com> (http://fcgomes.com)",
   "license": "MIT",
   "dependencies": {
+    "animate.css": "^3.5.2",
     "classnames": "^2.2.5",
     "i18next": "^10.2.1",
     "i18next-browser-languagedetector": "^2.1.0",

@@ -1,0 +1,54 @@
+@import "../util/colors";
+
+$primary-background-color: $color-primary-light;
+$primary-loader-color: $color-primary-dark;
+
+$accent-background-color: lighten($color-accent-light, 14);
+$accent-loader-color: darken($color-accent-dark, 3);
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+}
+
+.loader {
+  margin: 1.6em auto;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba($primary-background-color, .75);
+  border-right: 1.1em solid rgba($primary-background-color, .75);
+  border-bottom: 1.1em solid rgba($primary-background-color, .75);
+  border-left: 1.1em solid $primary-loader-color;
+  transform: translateZ(0);
+  animation: load8 1.1s infinite linear;
+
+  &--accent {
+    border-top: 1.1em solid rgba($accent-background-color, .75);
+    border-right: 1.1em solid rgba($accent-background-color, .75);
+    border-bottom: 1.1em solid rgba($accent-background-color, .75);
+    border-left: 1.1em solid $accent-loader-color;
+  }
+
+}
+
+@-webkit-keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

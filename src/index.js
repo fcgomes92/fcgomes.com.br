@@ -7,6 +7,7 @@ import App from './components/App/AppComponent';
 import i18n from './i18n';
 import registerServiceWorker from './registerServiceWorker';
 
+import 'animate.css';
 import './assets/react-toolbox/theme.css';
 import theme from './assets/react-toolbox/theme';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
