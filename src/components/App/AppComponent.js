@@ -51,8 +51,10 @@ class AppComponent extends React.Component {
             ]
         });
 
-        this.handleLoadBlogPosts().done();
-        this.handleLoadPortfolioPosts().done();
+        this.handleLoadBlogPosts().then(() => {
+        }).catch(error => console.error(error));
+        this.handleLoadPortfolioPosts().then(() => {
+        }).catch(error => console.error(error));
     }
 
     handleOnSectionChange = (section) => {
