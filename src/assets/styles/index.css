@@ -60,3 +60,6 @@ html, body, #root {
     color: #ffffff; }
   .link--accent, .link--black {
     color: #000000; }
+
+.menu__item {
+  color: #212121 !important; }

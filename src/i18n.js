@@ -6,6 +6,9 @@ i18n.use(LanguageDetector).init({
     resources: {
         'en': {
             translations: {
+                languageEN: '(EN) English',
+                languagePTBR: '(PT-BR) Portuguese',
+
                 bannerText: 'Welcome!',
 
                 about: 'about',
@@ -53,22 +56,25 @@ i18n.use(LanguageDetector).init({
         },
         'pt-BR': {
             translations: {
-                bannerText: 'Welcome!',
+                languageEN: '(EN) Inglês',
+                languagePTBR: '(PT-BR) Português',
 
-                about: 'about',
+                bannerText: 'Bem-vindo!',
+
+                about: 'sobre',
                 portfolio: 'portfolio',
-                contact: 'contact',
-                blogPosts: 'blog posts',
+                contact: 'contato',
+                blogPosts: 'posts do blog',
 
-                aboutTitle: 'About: Dev Talk',
+                aboutTitle: 'Sobre: Dev Talk',
                 aboutTitleLink: 'https://www.youtube.com/watch?v=2tdCu8uXQ7k',
 
                 aboutMusicUrl: 'https://www.youtube.com/watch?v=gnFuq-raWio',
-                aboutText0: "This is my ({{- twitterLink}}) personal website where you can find things like my {{- portfolioLink}} and my {{- contactLink}} info. You can also check my {{- blogPostsLink}}.",
-                aboutText1: "The whole site is built using {{- reactLink}} and {{- reactToolboxLink}}.",
-                aboutText2: "Hope you enjoy it. (:",
+                aboutText0: "Este é meu ({{- twitterLink}}) site pessoal, onde você pode encontrar coisas como meu {{- portfolioLink}} e minhas informações de {{- contactLink}}. Você também pode ver aqui os {{- blogPostsLink}}.",
+                aboutText1: "O site todo é feito utilizando {{- reactLink}} e {{- reactToolboxLink}}.",
+                aboutText2: "Espero que você goste. (:",
 
-                contactSectionTitle: 'Contact: Melody Calling',
+                contactSectionTitle: 'Contato: Melody Calling',
                 contactSectionTitleLink: '',
 
                 portfolioSectionTitle: 'Portfolio: Less Talk More Rokk',
@@ -81,19 +87,22 @@ i18n.use(LanguageDetector).init({
                 emailAddress: 'fcgomes.92@gmail.com',
                 emailUrl: 'mailto:fcgomes.92@gmail.com',
 
-                loading: 'Loading',
-                blogSectionTitle: 'Blog Posts: Cooking Up Something Good',
+                loading: 'Carregando',
+                blogSectionTitle: 'Posts do Blog: Cooking Up Something Good',
                 blogSectionTitleLink: 'https://www.youtube.com/watch?v=rGh97zsBfWk',
 
-                readMore: 'Read More',
+                readMore: 'Leia Mais',
 
                 react: 'React',
                 reactToolbox: 'React Toolbox',
 
                 errorLoadingBlogPostsTitle: 'Ops!',
-                errorLoadingBlogPosts: 'It seems we had a problem loading the latest blog posts.',
+                errorLoadingBlogPosts: 'Parece que houve algum problema na hora de carregar os artigos.',
 
-                version: 'Version',
+                errorLoadingPortfolioPostsTitle: 'Ops!',
+                errorLoadingPortfolioPosts: 'Parece que houve algum problema na hora de carregar o portfolio.',
+
+                version: 'Versão',
             },
         },
     },

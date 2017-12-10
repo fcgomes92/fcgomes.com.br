@@ -12,6 +12,8 @@ import CardText from 'react-toolbox/lib/card/CardText';
 import CardActions from 'react-toolbox/lib/card/CardActions';
 import Button from 'react-toolbox/lib/button/Button';
 import Link from 'react-toolbox/lib/link/Link';
+import IconMenu from 'react-toolbox/lib/menu/IconMenu';
+import MenuItem from 'react-toolbox/lib/menu/MenuItem';
 
 import classNames from 'classnames';
 
@@ -39,16 +41,20 @@ class AppComponent extends React.Component {
         blogPosts: [],
         loadingLast5PortfolioPosts: true,
         portfolioPosts: [],
+        currentLanguage: 'en',
     };
 
     componentDidMount() {
+        const {i18n} = this.props;
+
         this.setState({
             scrollSpySections: [
                 ReactDOM.findDOMNode(this.refs.hero),
                 ReactDOM.findDOMNode(this.refs.about),
                 ReactDOM.findDOMNode(this.refs.portfolio),
                 ReactDOM.findDOMNode(this.refs.contact),
-            ]
+            ],
+            currentLanguage: i18n.language,
         });
 
         this.handleLoadBlogPosts().then(() => {
@@ -79,6 +85,14 @@ class AppComponent extends React.Component {
             loadingLast5PortfolioPosts: false,
             portfolioPosts: [...response],
         });
+    };
+
+    handleChangeLanguage = (language) => {
+        const {i18n} = this.props;
+        i18n.changeLanguage(language);
+        this.setState({
+            currentLanguage: language,
+        })
     };
 
     renderPortfolioSection = () => {
@@ -209,6 +223,30 @@ class AppComponent extends React.Component {
         }
     };
 
+    renderLanguageMenu() {
+        const {t} = this.props;
+        const cls = {
+            menuItem: 'menu__item',
+            link: 'link link--primary',
+        };
+        const {currentLanguage} = this.state;
+
+        return (
+            <IconMenu icon={<span className={cls.link}>
+                    <span className={'fa fa-flag'}>&nbsp;({currentLanguage})</span>
+                </span>}
+                      caption={'TEST'}
+                      position={'topLeft'}
+                      menuRipple
+                      onSelect={this.handleChangeLanguage}
+                      selectable
+                      selected={currentLanguage}>
+                <MenuItem value='en' caption={t('languageEN')} className={cls.menuItem}/>
+                <MenuItem value='pt-BR' caption={t('languagePTBR')} className={cls.menuItem}/>
+            </IconMenu>
+        )
+    }
+
     render() {
         const {showAppBar, scrollSpySections} = this.state;
         const {t} = this.props;
@@ -252,7 +290,9 @@ class AppComponent extends React.Component {
 
                 <AppBar className={cls.appBar}
                         fixed
-                        rightIcon={<IconLogo className={cls.appBarIcon}/>}/>
+                        rightIcon={<IconLogo className={cls.appBarIcon}/>}>
+                    {this.renderLanguageMenu()}
+                </AppBar>
 
                 <section className={cls.hero} id={'hero'} ref={'hero'}>
                     <IconLogo className={cls.bannerIcon}/>
