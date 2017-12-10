@@ -50,10 +50,11 @@
       fill: $color-text;
       z-index: 0;
       margin: auto;
-      max-width: 90%;
       height: auto;
       max-height: 8em;
       opacity: .5;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     &__text {
