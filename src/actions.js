@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 
-import {CMS_URL} from "./settings/settings.dev";
+import {CMS_URL} from "./settings/settings";
 
 const normalizePosts = (posts) => {
     return posts.map(post => {
