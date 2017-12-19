@@ -50,6 +50,10 @@ i18n.use(LanguageDetector).init({
                 errorLoadingBlogPosts: 'It seems we had a problem loading the latest blog posts.',
                 errorLoadingPortfolioPostsTitle: 'Ops!',
                 errorLoadingPortfolioPosts: 'It seems we had a problem loading the latest portfolio posts.',
+                noPortfolioPostsYetTitle: 'No portfolio found!',
+                noPortfolioPostsYet: 'I\'m still writing the portfolio posts. Soon we\'ll have some here!',
+                noBlogPostsYetTitle: 'No blog posts found!',
+                noBlogPostsYet: 'I\'m still writing some blog posts. Soon we\'ll have some here!',
 
                 version: 'Version',
             },
@@ -98,9 +102,12 @@ i18n.use(LanguageDetector).init({
 
                 errorLoadingBlogPostsTitle: 'Ops!',
                 errorLoadingBlogPosts: 'Parece que houve algum problema na hora de carregar os artigos.',
-
                 errorLoadingPortfolioPostsTitle: 'Ops!',
                 errorLoadingPortfolioPosts: 'Parece que houve algum problema na hora de carregar o portfolio.',
+                noPortfolioPostsYetTitle: 'Nenhum portfolio cadastrado!',
+                noPortfolioPostsYet: 'Eu ainda estou elaborando os posts de portfolio. Em breve teremos alguns.',
+                noBlogPostsYetTitle: 'Nenhum artigo encontrado.',
+                noBlogPostsYet: 'Eu ainda estou escrevendo os artigos. Em breve teremos alguns.',
 
                 version: 'Versão',
             },

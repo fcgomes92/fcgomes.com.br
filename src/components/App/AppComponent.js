@@ -24,7 +24,7 @@ import '../../assets/styles/components/App.css';
 import '../../assets/styles/index.css';
 import ScrollSpy from "../ScrollSpy/ScrollSpyComponent";
 import IconLogo from "../svg/IconLogo";
-import {getBlogPosts, getPortfolioPosts} from "../../actions";
+
 import LoaderComponent from "../Loader/LoaderComponent";
 import {VERSION} from "../../settings/settings";
 
@@ -32,15 +32,17 @@ class AppComponent extends React.Component {
     static propTypes = {
         t: PropTypes.func,
         i18n: PropTypes.object,
+        blogPosts: PropTypes.object,
+        portfolioPosts: PropTypes.object,
+        loadPortfolioPosts: PropTypes.func,
+        loadBlogPosts: PropTypes.func,
     };
+
+    static defaultProps = {};
 
     state = {
         showAppBar: false,
         scrollSpySections: [],
-        loadingLast5BlogPosts: true,
-        blogPosts: [],
-        loadingLast5PortfolioPosts: true,
-        portfolioPosts: [],
         currentLanguage: 'en',
     };
 
@@ -57,10 +59,8 @@ class AppComponent extends React.Component {
             currentLanguage: i18n.language,
         });
 
-        this.handleLoadBlogPosts().then(() => {
-        }).catch(error => console.error(error));
-        this.handleLoadPortfolioPosts().then(() => {
-        }).catch(error => console.error(error));
+        this.handleLoadBlogPosts();
+        this.handleLoadPortfolioPosts();
     }
 
     handleOnSectionChange = (section) => {
@@ -71,20 +71,16 @@ class AppComponent extends React.Component {
         }
     };
 
-    handleLoadBlogPosts = async () => {
-        let response = await getBlogPosts();
-        await this.setState({
-            loadingLast5BlogPosts: false,
-            blogPosts: [...response],
-        });
+    handleLoadBlogPosts = () => {
+        if (this.props.loadBlogPosts) {
+            this.props.loadBlogPosts(5);
+        }
     };
 
-    handleLoadPortfolioPosts = async () => {
-        let response = await getPortfolioPosts();
-        await this.setState({
-            loadingLast5PortfolioPosts: false,
-            portfolioPosts: [...response],
-        });
+    handleLoadPortfolioPosts = () => {
+        if (this.props.loadPortfolioPosts) {
+            this.props.loadPortfolioPosts(3);
+        }
     };
 
     handleChangeLanguage = (language) => {
@@ -96,8 +92,11 @@ class AppComponent extends React.Component {
     };
 
     renderPortfolioSection = () => {
-        const {t} = this.props;
-        const {loadingLast5PortfolioPosts, portfolioPosts} = this.state;
+        const {t, portfolioPosts} = this.props;
+
+        if (!portfolioPosts) {
+            return null;
+        }
 
         const cls = {
             portfolioCards: 'portfolio-section__cards',
@@ -107,7 +106,7 @@ class AppComponent extends React.Component {
             portfolioLoading: 'portfolio-section__loading',
         };
 
-        if (loadingLast5PortfolioPosts) {
+        if (portfolioPosts.loading) {
             return (
                 <div className={cls.portfolioLoading}>
                     <LoaderComponent accent/>
@@ -115,7 +114,7 @@ class AppComponent extends React.Component {
                 </div>
             );
         }
-        if (portfolioPosts.length === 0) {
+        if (portfolioPosts.error) {
             return (
                 <div className={cls.portfolioCards}>
                     <Card key={`__portfolio_post_card__000`}
@@ -132,10 +131,28 @@ class AppComponent extends React.Component {
                     </Card>
                 </div>
             );
+        } else if (portfolioPosts.ids.length === 0) {
+            return (
+                <div className={cls.portfolioCards}>
+                    <Card key={`__portfolio_post_card__000`}
+                          className={classNames(cls.portfolioCard, {
+                              [`portfolio-section__cards__card--delay-animation-0s`]: true,
+                          })}>
+                        <CardTitle title={t('noPortfolioPostsYetTitle')}/>
+                        <CardMedia image={SVGCat}
+                                   aspectRatio="square"
+                                   className={cls.portfolioCardImage}/>
+                        <CardText>
+                            <p>{t('noPortfolioPostsYet')}</p>
+                        </CardText>
+                    </Card>
+                </div>
+            )
         } else {
             return (
                 <div className={cls.portfolioCards}>
-                    {portfolioPosts.map((post, idx) => {
+                    {portfolioPosts.ids.map((postId, idx) => {
+                        let post = portfolioPosts.byId[postId];
                         return (
                             <Card key={`__portfolio_post_card__${idx}`}
                                   className={classNames(cls.portfolioCard, {
@@ -160,8 +177,11 @@ class AppComponent extends React.Component {
     };
 
     renderBlogSection = () => {
-        const {t} = this.props;
-        const {loadingLast5BlogPosts, blogPosts} = this.state;
+        const {t, blogPosts} = this.props;
+
+        if (!blogPosts) {
+            return null;
+        }
 
         const cls = {
             blogSectionCards: 'blog-section__cards',
@@ -171,7 +191,7 @@ class AppComponent extends React.Component {
             blogSectionLoading: 'blog-section__loading',
         };
 
-        if (loadingLast5BlogPosts) {
+        if (blogPosts.loading) {
             return (
                 <div className={cls.blogSectionLoading}>
                     <LoaderComponent accent/>
@@ -179,7 +199,7 @@ class AppComponent extends React.Component {
                 </div>
             );
         }
-        if (blogPosts.length === 0) {
+        if (blogPosts.error) {
             return (
                 <div className={cls.blogSectionCards}>
                     <Card key={`__blog_post_card__000`}
@@ -196,10 +216,28 @@ class AppComponent extends React.Component {
                     </Card>
                 </div>
             );
+        } else if (blogPosts.ids.length === 0) {
+            return (
+                <div className={cls.blogSectionCards}>
+                    <Card key={`__blog_post_card__000`}
+                          className={classNames(cls.blogSectionCard, {
+                              [`blog-section__cards__card--delay-animation-0s`]: true,
+                          })}>
+                        <CardMedia image={SVGCat}
+                                   aspectRatio="square"
+                                   className={cls.blogSectionCardImage}/>
+                        <CardTitle title={t('noBlogPostsYetTitle')}/>
+                        <CardText>
+                            <p>{t('noBlogPostsYet')}</p>
+                        </CardText>
+                    </Card>
+                </div>
+            )
         } else {
             return (
                 <div className={cls.blogSectionCards}>
-                    {blogPosts.map((post, idx) => {
+                    {blogPosts.ids.map((postId, idx) => {
+                        let post = blogPosts.byId[postId];
                         return (
                             <Card key={`__blog_post_card_${idx}`}
                                   className={classNames(cls.blogSectionCard, {
