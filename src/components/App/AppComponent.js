@@ -26,10 +26,13 @@ import IconLogo from "../svg/IconLogo";
 
 import AppBarComponent from "../AppBar/AppBarComponent";
 import LoaderComponent from "../Loader/LoaderComponent";
-import {VERSION} from "../../settings/settings";
+import FooterComponent from "../Footer/FooterComponent";
 import {URLS} from "../../urls";
 
 class AppComponent extends React.Component {
+    static AMOUNT_OF_PORTFOLIO_POSTS = 3;
+    static AMOUNT_OF_BLOG_POSTS = 5;
+
     static propTypes = {
         t: PropTypes.func,
         i18n: PropTypes.object,
@@ -74,13 +77,13 @@ class AppComponent extends React.Component {
 
     handleLoadBlogPosts = () => {
         if (this.props.loadBlogPosts) {
-            this.props.loadBlogPosts(5);
+            this.props.loadBlogPosts(AppComponent.AMOUNT_OF_BLOG_POSTS);
         }
     };
 
     handleLoadPortfolioPosts = () => {
         if (this.props.loadPortfolioPosts) {
-            this.props.loadPortfolioPosts(3);
+            this.props.loadPortfolioPosts(AppComponent.AMOUNT_OF_PORTFOLIO_POSTS);
         }
     };
 
@@ -117,7 +120,14 @@ class AppComponent extends React.Component {
                         <CardTitle title={t('errorLoadingPortfolioPostsTitle')}/>
                         <CardMedia image={SVGCat}
                                    aspectRatio="square"
-                                   className={cls.portfolioCardImage}/>
+                                   className={cls.portfolioCardImage}>
+                            <small>
+                                <Link href={'https://www.freepik.com/free-vector/several-dog-and-cat-emoticons-in-flat-design_1002049.htm'}
+                                      target={'__blank'}
+                                      className={cls.linkAccent}
+                                      rel="noopener noreferrer">Designed by Freepik</Link>
+                            </small>
+                        </CardMedia>
                         <CardText>
                             <p>{t('errorLoadingPortfolioPosts')}</p>
                         </CardText>
@@ -134,7 +144,14 @@ class AppComponent extends React.Component {
                         <CardTitle title={t('noPortfolioPostsYetTitle')}/>
                         <CardMedia image={SVGCat}
                                    aspectRatio="square"
-                                   className={cls.portfolioCardImage}/>
+                                   className={cls.portfolioCardImage}>
+                            <small>
+                                <Link href={'https://www.freepik.com/free-vector/several-dog-and-cat-emoticons-in-flat-design_1002049.htm'}
+                                      target={'__blank'}
+                                      className={cls.linkAccent}
+                                      rel="noopener noreferrer">Designed by Freepik</Link>
+                            </small>
+                        </CardMedia>
                         <CardText>
                             <p>{t('noPortfolioPostsYet')}</p>
                         </CardText>
@@ -145,26 +162,30 @@ class AppComponent extends React.Component {
             return (
                 <div className={cls.portfolioCards}>
                     {portfolioPosts.ids.map((postId, idx) => {
-                        let post = portfolioPosts.byId[postId];
-                        return (
-                            <Card key={`__portfolio_post_card__${idx}`}
-                                  className={classNames(cls.portfolioCard, {
-                                      [`portfolio-section__cards__card--delay-animation-0s`]: true,
-                                  })}>
-                                <CardTitle title={post.title}/>
-                                <CardMedia image={post.featured_image}
-                                           aspectRatio="square"
-                                           className={cls.portfolioCardImage}/>
-                                <CardText className={cls.portfolioCardExcerpt}>
-                                    <p dangerouslySetInnerHTML={{__html: post.excerpt}}></p>
-                                </CardText>
-                                <CardActions>
-                                    <LinkDOM to={URLS.portfolioDetail(postId)}>
-                                        <Button label={t('readMore')} flat primary/>
-                                    </LinkDOM>
-                                </CardActions>
-                            </Card>
-                        )
+                        if (idx >= AppComponent.AMOUNT_OF_PORTFOLIO_POSTS) {
+                            return null;
+                        } else {
+                            let post = portfolioPosts.byId[postId];
+                            return (
+                                <Card key={`__portfolio_post_card__${idx}`}
+                                      className={classNames(cls.portfolioCard, {
+                                          [`portfolio-section__cards__card--delay-animation-0s`]: true,
+                                      })}>
+                                    <CardTitle title={post.title}/>
+                                    <CardMedia image={post.featured_image}
+                                               aspectRatio="square"
+                                               className={cls.portfolioCardImage}/>
+                                    <CardText className={cls.portfolioCardExcerpt}>
+                                        <p dangerouslySetInnerHTML={{__html: post.excerpt}}></p>
+                                    </CardText>
+                                    <CardActions>
+                                        <LinkDOM to={URLS.portfolioDetail(postId)}>
+                                            <Button label={t('readMore')} flat primary/>
+                                        </LinkDOM>
+                                    </CardActions>
+                                </Card>
+                            )
+                        }
                     })}
                 </div>
             )
@@ -203,7 +224,14 @@ class AppComponent extends React.Component {
                           })}>
                         <CardMedia image={SVGCat}
                                    aspectRatio="square"
-                                   className={cls.blogSectionCardImage}/>
+                                   className={cls.blogSectionCardImage}>
+                            <small>
+                                <Link href={'https://www.freepik.com/free-vector/several-dog-and-cat-emoticons-in-flat-design_1002049.htm'}
+                                      target={'__blank'}
+                                      className={cls.linkAccent}
+                                      rel="noopener noreferrer">Designed by Freepik</Link>
+                            </small>
+                        </CardMedia>
                         <CardTitle title={t('errorLoadingBlogPostsTitle')}/>
                         <CardText>
                             <p>{t('errorLoadingBlogPosts')}</p>
@@ -220,7 +248,14 @@ class AppComponent extends React.Component {
                           })}>
                         <CardMedia image={SVGCat}
                                    aspectRatio="square"
-                                   className={cls.blogSectionCardImage}/>
+                                   className={cls.blogSectionCardImage}>
+                            <small>
+                                <Link href={'https://www.freepik.com/free-vector/several-dog-and-cat-emoticons-in-flat-design_1002049.htm'}
+                                      target={'__blank'}
+                                      className={cls.linkAccent}
+                                      rel="noopener noreferrer">Designed by Freepik</Link>
+                            </small>
+                        </CardMedia>
                         <CardTitle title={t('noBlogPostsYetTitle')}/>
                         <CardText>
                             <p>{t('noBlogPostsYet')}</p>
@@ -232,6 +267,9 @@ class AppComponent extends React.Component {
             return (
                 <div className={cls.blogSectionCards}>
                     {blogPosts.ids.map((postId, idx) => {
+                        if (idx >= AppComponent.AMOUNT_OF_BLOG_POSTS) {
+                            return null;
+                        }
                         let post = blogPosts.byId[postId];
                         return (
                             <Card key={`__blog_post_card_${idx}`}
@@ -255,7 +293,6 @@ class AppComponent extends React.Component {
             )
         }
     };
-
 
 
     render() {
@@ -355,7 +392,7 @@ class AppComponent extends React.Component {
                         <span>{t('portfolioSectionTitle')}</span>
                     </Link>
                     {this.renderPortfolioSection()}
-                    <LinkDOM className={cls.readMoreLink} to={URLS.portfolioList()}><Button label={t('readMore')} flat accent/></LinkDOM>
+                    <LinkDOM className={cls.readMoreLink} to={URLS.portfolioList()}><Button className={'button--md'} label={t('readMore')} flat accent/></LinkDOM>
                 </section>
 
                 <section className={cls.blogSection} id={"blog"}>
@@ -366,7 +403,7 @@ class AppComponent extends React.Component {
                         <span>{t('blogSectionTitle')}</span>
                     </Link>
                     {this.renderBlogSection()}
-                    <LinkDOM className={cls.readMoreLink} to={URLS.blogList()}><Button label={t('readMore')} flat accent/></LinkDOM>
+                    <LinkDOM className={cls.readMoreLink} to={URLS.blogList()}><Button className={'button--md'} label={t('readMore')} flat accent/></LinkDOM>
                 </section>
 
                 <section className={cls.contactSection} id={"contact"} ref={"contact"}>
@@ -391,10 +428,7 @@ class AppComponent extends React.Component {
                         </Link>
                     </div>
                 </section>
-                <footer className={cls.footer}>
-                    <a className={cls.linkAccent} href='https://www.freepik.com/free-vector/several-dog-and-cat-emoticons-in-flat-design_1002049.htm'>Designed by Freepik</a>
-                    <span>{t('version')}:&nbsp;{VERSION}</span>
-                </footer>
+                <FooterComponent/>
             </main>
         )
     }

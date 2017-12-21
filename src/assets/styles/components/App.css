@@ -65,14 +65,6 @@
   position: relative;
   overflow: auto; }
 
-.app-bar {
-  display: none; }
-  .app-bar__icon {
-    width: 100% !important;
-    height: 100% !important; }
-  .app-bar--show {
-    display: block; }
-
 .about-section {
   padding: 1.6em;
   background: linear-gradient(#320b86, #260865, #212121);

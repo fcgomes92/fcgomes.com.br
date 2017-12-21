@@ -22,6 +22,12 @@
         height: auto;
         margin: auto;
       }
+
+      &__read-more{
+        width: 100%;
+        margin: .8em auto;
+        text-align: center;
+      }
     }
 
     &__image {

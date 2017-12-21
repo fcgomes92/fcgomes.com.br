@@ -55,6 +55,8 @@ i18n.use(LanguageDetector).init({
                 noBlogPostsYetTitle: 'No blog posts found!',
                 noBlogPostsYet: 'I\'m still writing some blog posts. Soon we\'ll have some here!',
 
+                morePortfolioPosts: 'More Portfolio Posts',
+
                 version: 'Version',
             },
         },

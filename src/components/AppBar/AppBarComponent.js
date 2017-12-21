@@ -6,11 +6,14 @@ import {withRouter} from 'react-router-dom';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import IconMenu from 'react-toolbox/lib/menu/IconMenu';
 import MenuItem from 'react-toolbox/lib/menu/MenuItem';
-import IconLogo from "../svg/IconLogo";
+import Navigation from 'react-toolbox/lib/navigation/Navigation';
 
 import classNames from "classnames";
 
 import {translate} from 'react-i18next';
+
+import '../../assets/styles/components/AppBar.css';
+import IconLogo from "../svg/IconLogo";
 import {URLS} from "../../urls";
 
 class AppBarComponent extends React.Component {
@@ -33,16 +36,16 @@ class AppBarComponent extends React.Component {
         const {t, i18n} = this.props;
         const cls = {
             menuItem: 'menu__item',
-            link: 'link link--primary',
+            iconMenu: 'link link--primary',
         };
         const currentLanguage = i18n.language;
 
         return (
-            <IconMenu icon={<span className={cls.link}>
+            <IconMenu icon={<span className={cls.iconMenu}>
                     <span className={'fa fa-flag'}>&nbsp;({currentLanguage})</span>
                 </span>}
-                      caption={'TEST'}
-                      position={'topLeft'}
+                      caption={'Language'}
+                      position={'topRight'}
                       menuRipple
                       onSelect={this.handleChangeLanguage}
                       selectable
@@ -64,14 +67,17 @@ class AppBarComponent extends React.Component {
                 'app-bar--show': show,
             }),
             appBarIcon: 'app-bar__icon',
+            navigation: 'menu',
         };
 
         return (
             <AppBar className={cls.appBar}
                     fixed
-                    onRightIconClick={this.handleLogoClick}
-                    rightIcon={<IconLogo className={cls.appBarIcon}/>}>
-                {this.renderLanguageMenu()}
+                    onLeftIconClick={this.handleLogoClick}
+                    leftIcon={<IconLogo className={cls.appBarIcon}/>}>
+                <Navigation type="horizontal" className={cls.navigation}>
+                    {this.renderLanguageMenu()}
+                </Navigation>
             </AppBar>
         )
     }

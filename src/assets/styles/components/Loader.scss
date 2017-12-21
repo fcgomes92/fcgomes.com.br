@@ -30,7 +30,6 @@ $accent-loader-color: darken($color-accent-dark, 3);
     border-bottom: 1.1em solid rgba($accent-background-color, .75);
     border-left: 1.1em solid $accent-loader-color;
   }
-
 }
 
 @-webkit-keyframes load8 {
@@ -51,4 +50,8 @@ $accent-loader-color: darken($color-accent-dark, 3);
   100% {
     transform: rotate(360deg);
   }
+}
+
+.loader-container {
+  text-align: center;
 }

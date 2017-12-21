@@ -1,0 +1,20 @@
+@import "../util/colors";
+
+.text {
+  &--sm {
+    font-size: 1.4em;
+  }
+  &--md {
+    font-size: 2.4em;
+  }
+  &--lg {
+    font-size: 3.6em;
+  }
+  &--primary {
+    color: $color-text;
+  }
+
+  &--accent {
+    color: $color-text-secondary;
+  }
+}

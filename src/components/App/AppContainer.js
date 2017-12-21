@@ -20,12 +20,12 @@ class AppContainer extends React.Component {
         getPortfolioPosts: PropTypes.func
     };
 
-    handleLoadPortfolioPosts = async (amount = null) => {
-        return await this.props.getBlogPosts(amount);
+    handleLoadPortfolioPosts = async (amount) => {
+        return await this.props.getPortfolioPosts(amount);
     };
 
-    handleLoadBlogPosts = async (amount = null) => {
-        return await this.props.getPortfolioPosts(amount);
+    handleLoadBlogPosts = async (amount) => {
+        return await this.props.getBlogPosts(amount);
     };
 
     render() {

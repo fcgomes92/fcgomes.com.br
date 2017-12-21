@@ -72,19 +72,6 @@
   overflow: auto;
 }
 
-.app-bar {
-  display: none;
-
-  &__icon {
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-  &--show {
-    display: block;
-  }
-}
-
 .about-section {
   padding: 1.6em;
   background: linear-gradient($color-primary-dark, darken($color-primary-dark, 7), #212121);

@@ -14,5 +14,9 @@
       width: auto;
       height: auto;
       margin: auto; }
+    .portfolio-posts-detail__card__content__read-more {
+      width: 100%;
+      margin: .8em auto;
+      text-align: center; }
   .portfolio-posts-detail__card__image {
     max-height: 32em; }

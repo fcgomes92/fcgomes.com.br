@@ -64,12 +64,94 @@ main.main--showing-nav-bar {
   .link--accent, .link--black {
     color: #000000; }
 
-.menu__item {
-  color: #212121 !important; }
+.menu {
+  box-sizing: border-box;
+  text-align: right;
+  width: 100%; }
+  .menu button {
+    width: 100%;
+    box-sizing: border-box; }
+  .menu__item {
+    color: #212121 !important; }
 
-.pagination-container {
+/**
+ * Retrieves a color value from the $material-colors Sass map
+ * Inspired by https://github.com/nilskaspersson/Google-Material-UI-Color-Palette/
+ *
+ * @function
+ * @param {string} color-name             - quoted, lower-case, dasherized color
+ *                                          name (e.g. 'pink', 'amber')
+ * @param {string} [color-variant='500']  - quoted, lowercase color variant (e.g.
+ *                                          '200', 'a100')
+ */
+/**
+ * Retrieves a color value from the $material-colors Sass map
+ * Inspired by https://github.com/nilskaspersson/Google-Material-UI-Color-Palette/
+ *
+ * @function
+ * @param {string} color-name             - quoted, lower-case, dasherized color
+ *                                          name (e.g. 'pink', 'amber')
+ * @param {string} [color-variant='500']  - quoted, lowercase color variant (e.g.
+ *                                          '200', 'a100')
+ */
+.pagination {
   background: #FFF;
   font-size: 2.4em;
   text-align: center;
-  width: 50%;
-  margin: auto; }
+  width: 100%;
+  margin: auto;
+  border-radius: 2px;
+  align-items: center; }
+  @media (min-width: 40em) {
+    .pagination {
+      width: 50%; } }
+  .pagination__container {
+    box-sizing: border-box;
+    list-style: none;
+    padding: .4em;
+    margin: .8em 0;
+    display: flex;
+    justify-content: space-between; }
+    .pagination__container__page, .pagination__container__nav {
+      color: #000000;
+      transition: all 150ms ease; }
+      .pagination__container__page a, .pagination__container__nav a {
+        cursor: pointer;
+        transition: all 150ms ease; }
+        .pagination__container__page a:hover, .pagination__container__nav a:hover {
+          color: #673ab7; }
+      .pagination__container__page--active, .pagination__container__nav--active {
+        font-weight: bold;
+        color: #9a67ea; }
+      .pagination__container__page.disabled, .pagination__container__nav.disabled {
+        color: #bdbdbd; }
+        .pagination__container__page.disabled a, .pagination__container__nav.disabled a {
+          cursor: not-allowed; }
+
+/**
+ * Retrieves a color value from the $material-colors Sass map
+ * Inspired by https://github.com/nilskaspersson/Google-Material-UI-Color-Palette/
+ *
+ * @function
+ * @param {string} color-name             - quoted, lower-case, dasherized color
+ *                                          name (e.g. 'pink', 'amber')
+ * @param {string} [color-variant='500']  - quoted, lowercase color variant (e.g.
+ *                                          '200', 'a100')
+ */
+.text--sm {
+  font-size: 1.4em; }
+
+.text--md {
+  font-size: 2.4em; }
+
+.text--lg {
+  font-size: 3.6em; }
+
+.text--primary {
+  color: #ffffff; }
+
+.text--accent {
+  color: #000000; }
+
+.button--md {
+  font-size: 2.0em; }

@@ -7,6 +7,7 @@ import BlogPostsListContainer from "./components/BlogPostsList/BlogPostsListCont
 export const URLS = {
     base: () => `/`,
     portfolioList: () => `/portfolio`,
+    portfolioListPage: (page = 1) => `/portfolio?page=${page}`,
     portfolioDetail: (postId = ':postId') => `/portfolio/${postId}`,
     blogList: () => `/blog`,
     blogDetail: (postId = ':postId') => `/blog/${postId}`,

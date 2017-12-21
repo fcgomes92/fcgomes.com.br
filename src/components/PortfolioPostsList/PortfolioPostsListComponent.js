@@ -5,6 +5,8 @@ import classNames from "classnames";
 
 import {translate} from 'react-i18next';
 
+import ReactPaginate from 'react-paginate';
+
 import Button from 'react-toolbox/lib/button/Button';
 import Card from 'react-toolbox/lib/card/Card';
 import CardMedia from 'react-toolbox/lib/card/CardMedia';
@@ -17,31 +19,48 @@ import {Link} from 'react-router-dom';
 import AppBarComponent from '../AppBar/AppBarComponent';
 import '../../assets/styles/components/PortfolioPostsList.css';
 import {URLS} from "../../urls";
+import LoaderComponent from "../Loader/LoaderComponent";
 
 class PortfolioPostsListComponent extends React.Component {
     static propTypes = {
         t: PropTypes.func,
         i18n: PropTypes.object,
         posts: PropTypes.object,
+        currentPage: PropTypes.number,
+        handleChangePage: PropTypes.func,
     };
 
     componentDidMount() {
         window.scrollTo(0, 0);
     }
 
-    render() {
-        const {posts, currentPage, t} = this.props;
+    renderLoading() {
+        const {t} = this.props;
         const cls = {
-            main: 'animated fadeIn main--showing-nav-bar',
+            loaderContainer: 'loader-container',
+            loadingText: 'text--lg text--primary',
+        };
+
+        return (
+            <div className={cls.loaderContainer}>
+                <LoaderComponent accent/>
+                <div className={cls.loadingText}>{t('loading')}</div>
+            </div>
+        )
+    }
+
+    renderCards() {
+        const {posts, t} = this.props;
+
+        const cls = {
             portfolioCards: 'portfolio-posts-list__cards',
             portfolioCard: 'portfolio-posts-list__card',
             portfolioCardImage: 'portfolio-posts-list__card__image',
             portfolioCardExcerpt: 'portfolio-posts-list__card__excerpt',
             portfolioLoading: 'portfolio-posts-list__loading',
-            paginationContainer: 'pagination-container',
         };
-        return <main className={cls.main}>
-            <AppBarComponent/>
+
+        return (
             <section className={cls.portfolioCards}>
                 {posts.ids.map(ppId => {
                     let post = posts.byId[ppId];
@@ -66,9 +85,47 @@ class PortfolioPostsListComponent extends React.Component {
                     )
                 })}
             </section>
-            {/* TODO: really create a pagination component (not just show in a white bg )*/}
-            <div className={cls.paginationContainer}>
-                {currentPage}/{posts.totalPagesAvailable}
+        )
+    }
+
+    renderContent() {
+        const {posts} = this.props;
+
+        if (posts.loading) {
+            return this.renderLoading();
+        } else {
+            return this.renderCards();
+        }
+    }
+
+    render() {
+        const {posts, currentPage} = this.props;
+        const cls = {
+            main: 'animated fadeIn main--showing-nav-bar',
+            nextLabel: 'material-icons pagination__container__nav',
+            previousLabel: 'material-icons pagination__container__nav',
+            pagination: 'pagination',
+            paginationContainer: 'pagination__container',
+            pageClassName: 'pagination__container__page',
+            activeClassName: 'pagination-container__page pagination__container__page--active',
+        };
+
+        return <main className={cls.main}>
+            <AppBarComponent/>
+            {this.renderContent()}
+            <div className={cls.pagination}>
+                <ReactPaginate containerClassName={cls.paginationContainer}
+                               pageCount={posts.totalPagesAvailable}
+                               nextClassName={cls.nextLabel}
+                               nextLabel={'navigate_next'}
+                               previousClassName={cls.previousLabel}
+                               previousLabel={'navigate_before'}
+                               pageRangeDisplayed={5}
+                               marginPagesDisplayed={1}
+                               onPageChange={this.props.handleChangePage}
+                               pageClassName={cls.pageClassName}
+                               activeClassName={cls.activeClassName}
+                               forcePage={currentPage - 1}/>
             </div>
         </main>
     }

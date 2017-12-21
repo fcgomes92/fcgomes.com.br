@@ -51,7 +51,7 @@ const normalizePosts = async (posts) => {
     }
 };
 
-export const getBlogPosts = (perPage = 5, page = 1) => {
+export const getBlogPosts = (perPage = 6, page = 1) => {
     return async (dispatch, getState) => {
         dispatch({
             type: UPDATE_BLOG_POSTS_LOADING,
@@ -108,7 +108,7 @@ export const getBlogPosts = (perPage = 5, page = 1) => {
     }
 };
 
-export const getPortfolioPosts = (perPage = 3, page = 1) => {
+export const getPortfolioPosts = (perPage = 4, page = 1) => {
     return async (dispatch, getState) => {
         // set the portfolio posts as loading
         dispatch({

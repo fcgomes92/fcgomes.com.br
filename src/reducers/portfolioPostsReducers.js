@@ -10,12 +10,13 @@ import {
 const portfolioPostsReducerIds = (state = [], action) => {
     switch (action.type) {
         case UPDATE_PORTFOLIO_POSTS:
-            return action.payload.reduce((acc, post) => {
-                if (acc.indexOf(post.id) === -1) {
-                    acc.push(post.id);
-                }
-                return acc;
-            }, state).sort((postA, postB) => postB - postA);
+            return action.payload.map(post => post.id).sort((postA, postB) => postB - postA);
+            // return action.payload.reduce((acc, post) => {
+            //     if (acc.indexOf(post.id) === -1) {
+            //         acc.push(post.id);
+            //     }
+            //     return acc;
+            // }, state).sort((postA, postB) => postB - postA);
         case ADD_PORTFOLIO_POST:
             if (state.indexOf(action.payload.id) === -1) {
                 return [...state, action.payload.id].sort((postA, postB) => postB - postA);
@@ -33,7 +34,7 @@ const portfolioPostsReducerById = (state = {}, action) => {
             return action.payload.reduce((acc, post) => {
                 acc[post.id] = post;
                 return acc;
-            }, {});
+            }, state);
         case ADD_PORTFOLIO_POST:
             return Object.assign({}, state, {[action.payload.id]: action.payload});
         default:
