@@ -3,6 +3,14 @@
     margin: 1.6em auto;
     width: 98%;
 
+    @media(min-width: 42em){
+      width: 75%;
+    }
+
+    @media(min-width: 120em){
+      width: 50%;
+    }
+
     &__title {
       &--author {
         text-align: right;
@@ -14,6 +22,7 @@
     &__content {
       z-index: 1;
       margin-bottom: .8em;
+      padding: 1.6em;
 
       img {
         text-align: center;
