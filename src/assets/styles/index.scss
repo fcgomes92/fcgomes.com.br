@@ -15,6 +15,12 @@ main {
   @media(min-width: 42em) {
     height: 100%;
   }
+
+  &.main {
+    &--showing-nav-bar {
+      padding-top: 7.2em;
+    }
+  }
 }
 
 .full-height {
@@ -27,3 +33,4 @@ main {
 
 @import "components/links";
 @import "components/menu";
+@import "components/pagination";

@@ -1,0 +1,12 @@
+.portfolio-posts-list__cards {
+  display: flex;
+  flex-wrap: wrap; }
+
+.portfolio-posts-list__card {
+  flex-basis: 90%;
+  margin: 1.6em auto; }
+  @media (min-width: 32em) {
+    .portfolio-posts-list__card {
+      flex-basis: 40%; } }
+  .portfolio-posts-list__card__image {
+    max-height: 16em; }

@@ -24,11 +24,14 @@ class RootComponent extends React.Component {
                         {
                             Object.keys(ROUTES).map(routeKey => {
                                 let route = ROUTES[routeKey];
-                                return <Route exact={route.exact}
-                                              path={route.path}
-                                              component={route.component}
-                                              key={`__key_${route.name}`}
-                                />
+                                return (
+                                    <Route
+                                        exact={route.exact}
+                                        path={route.path}
+                                        component={route.component}
+                                        key={`__key_${route.name}`}
+                                    />
+                                )
                             })
                         }
                     </Switch>

@@ -31,6 +31,9 @@ html, body, #root {
   main {
     height: 100%; } }
 
+main.main--showing-nav-bar {
+  padding-top: 7.2em; }
+
 .full-height {
   min-height: 55em; }
   @media (min-height: 32em) {
@@ -63,3 +66,10 @@ html, body, #root {
 
 .menu__item {
   color: #212121 !important; }
+
+.pagination-container {
+  background: #FFF;
+  font-size: 2.4em;
+  text-align: center;
+  width: 50%;
+  margin: auto; }

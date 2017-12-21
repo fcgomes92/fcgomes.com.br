@@ -14,6 +14,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 class AppContainer extends React.Component {
     static propTypes = {
+        history: PropTypes.object,
+        location: PropTypes.object,
         getBlogPosts: PropTypes.func,
         getPortfolioPosts: PropTypes.func
     };
@@ -27,8 +29,10 @@ class AppContainer extends React.Component {
     };
 
     render() {
-        const {blogPosts, portfolioPosts} = this.props;
+        const {blogPosts, portfolioPosts, history, location} = this.props;
         return <AppComponent blogPosts={blogPosts}
+                             history={history}
+                             location={location}
                              portfolioPosts={portfolioPosts}
                              loadBlogPosts={this.handleLoadBlogPosts}
                              loadPortfolioPosts={this.handleLoadPortfolioPosts}/>

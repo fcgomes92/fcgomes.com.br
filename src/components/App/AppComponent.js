@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 
 import PropTypes from 'prop-types';
 
-import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Card from 'react-toolbox/lib/card/Card';
 import CardMedia from 'react-toolbox/lib/card/CardMedia';
 import CardTitle from 'react-toolbox/lib/card/CardTitle';
@@ -12,8 +11,8 @@ import CardText from 'react-toolbox/lib/card/CardText';
 import CardActions from 'react-toolbox/lib/card/CardActions';
 import Button from 'react-toolbox/lib/button/Button';
 import Link from 'react-toolbox/lib/link/Link';
-import IconMenu from 'react-toolbox/lib/menu/IconMenu';
-import MenuItem from 'react-toolbox/lib/menu/MenuItem';
+
+import {Link as LinkDOM} from 'react-router-dom';
 
 import classNames from 'classnames';
 
@@ -25,13 +24,17 @@ import '../../assets/styles/index.css';
 import ScrollSpy from "../ScrollSpy/ScrollSpyComponent";
 import IconLogo from "../svg/IconLogo";
 
+import AppBarComponent from "../AppBar/AppBarComponent";
 import LoaderComponent from "../Loader/LoaderComponent";
 import {VERSION} from "../../settings/settings";
+import {URLS} from "../../urls";
 
 class AppComponent extends React.Component {
     static propTypes = {
         t: PropTypes.func,
         i18n: PropTypes.object,
+        history: PropTypes.object,
+        location: PropTypes.object,
         blogPosts: PropTypes.object,
         portfolioPosts: PropTypes.object,
         loadPortfolioPosts: PropTypes.func,
@@ -43,11 +46,10 @@ class AppComponent extends React.Component {
     state = {
         showAppBar: false,
         scrollSpySections: [],
-        currentLanguage: 'en',
     };
 
     componentDidMount() {
-        const {i18n} = this.props;
+        window.scrollTo(0, 0);
 
         this.setState({
             scrollSpySections: [
@@ -56,7 +58,6 @@ class AppComponent extends React.Component {
                 ReactDOM.findDOMNode(this.refs.portfolio),
                 ReactDOM.findDOMNode(this.refs.contact),
             ],
-            currentLanguage: i18n.language,
         });
 
         this.handleLoadBlogPosts();
@@ -81,14 +82,6 @@ class AppComponent extends React.Component {
         if (this.props.loadPortfolioPosts) {
             this.props.loadPortfolioPosts(3);
         }
-    };
-
-    handleChangeLanguage = (language) => {
-        const {i18n} = this.props;
-        i18n.changeLanguage(language);
-        this.setState({
-            currentLanguage: language,
-        })
     };
 
     renderPortfolioSection = () => {
@@ -166,7 +159,9 @@ class AppComponent extends React.Component {
                                     <p dangerouslySetInnerHTML={{__html: post.excerpt}}></p>
                                 </CardText>
                                 <CardActions>
-                                    <Button label={t('readMore')} flat primary/>
+                                    <LinkDOM to={URLS.portfolioDetail(postId)}>
+                                        <Button label={t('readMore')} flat primary/>
+                                    </LinkDOM>
                                 </CardActions>
                             </Card>
                         )
@@ -261,29 +256,7 @@ class AppComponent extends React.Component {
         }
     };
 
-    renderLanguageMenu() {
-        const {t} = this.props;
-        const cls = {
-            menuItem: 'menu__item',
-            link: 'link link--primary',
-        };
-        const {currentLanguage} = this.state;
 
-        return (
-            <IconMenu icon={<span className={cls.link}>
-                    <span className={'fa fa-flag'}>&nbsp;({currentLanguage})</span>
-                </span>}
-                      caption={'TEST'}
-                      position={'topLeft'}
-                      menuRipple
-                      onSelect={this.handleChangeLanguage}
-                      selectable
-                      selected={currentLanguage}>
-                <MenuItem value='en' caption={t('languageEN')} className={cls.menuItem}/>
-                <MenuItem value='pt-BR' caption={t('languagePTBR')} className={cls.menuItem}/>
-            </IconMenu>
-        )
-    }
 
     render() {
         const {showAppBar, scrollSpySections} = this.state;
@@ -311,13 +284,10 @@ class AppComponent extends React.Component {
             blogSection: 'full-height blog-section',
             blogSectionTitle: 'blog-section__title link link--primary',
             content: 'content',
-            appBar: classNames('app-bar', {
-                'app-bar--show': showAppBar,
-            }),
-            appBarIcon: 'app-bar__icon',
             link: 'link link--primary',
             linkAccent: 'link link--accent',
             footer: 'footer',
+            readMoreLink: 'read-more-link',
         };
 
         return (
@@ -326,11 +296,7 @@ class AppComponent extends React.Component {
                            onSectionChange={this.handleOnSectionChange}
                            sections={scrollSpySections}/>
 
-                <AppBar className={cls.appBar}
-                        fixed
-                        rightIcon={<IconLogo className={cls.appBarIcon}/>}>
-                    {this.renderLanguageMenu()}
-                </AppBar>
+                <AppBarComponent show={showAppBar}/>
 
                 <section className={cls.hero} id={'hero'} ref={'hero'}>
                     <IconLogo className={cls.bannerIcon}/>
@@ -389,6 +355,7 @@ class AppComponent extends React.Component {
                         <span>{t('portfolioSectionTitle')}</span>
                     </Link>
                     {this.renderPortfolioSection()}
+                    <LinkDOM className={cls.readMoreLink} to={URLS.portfolioList()}><Button label={t('readMore')} flat accent/></LinkDOM>
                 </section>
 
                 <section className={cls.blogSection} id={"blog"}>
@@ -399,6 +366,7 @@ class AppComponent extends React.Component {
                         <span>{t('blogSectionTitle')}</span>
                     </Link>
                     {this.renderBlogSection()}
+                    <LinkDOM className={cls.readMoreLink} to={URLS.blogList()}><Button label={t('readMore')} flat accent/></LinkDOM>
                 </section>
 
                 <section className={cls.contactSection} id={"contact"} ref={"contact"}>
