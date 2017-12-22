@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import LazyLoad from 'react-lazyload';
+
 import {withRouter, Link as LinkDOM} from 'react-router-dom';
 
 import Card from 'react-toolbox/lib/card/Card';
@@ -117,9 +119,13 @@ class BlogPostsDetailComponent extends React.Component {
 
         return <main className={cls.main}>
             <AppBarComponent/>
-            {this.renderContent()}
+            <LazyLoad once height={'100%'}>
+                {this.renderContent()}
+            </LazyLoad>
         </main>
     }
 }
 
-export default withRouter(translate('translations')(BlogPostsDetailComponent));
+export default withRouter(
+    translate('translations')(BlogPostsDetailComponent)
+);

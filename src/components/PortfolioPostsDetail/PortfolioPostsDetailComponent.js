@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import {withRouter, Link as LinkDOM} from 'react-router-dom';
 
+import LazyLoad from 'react-lazyload';
+
 import Card from 'react-toolbox/lib/card/Card';
 import CardMedia from 'react-toolbox/lib/card/CardMedia';
 import CardTitle from 'react-toolbox/lib/card/CardTitle';
@@ -117,7 +119,9 @@ class PortfolioPostsDetailComponent extends React.Component {
 
         return <main className={cls.main}>
             <AppBarComponent/>
-            {this.renderContent()}
+            <LazyLoad once height={'100%'}>
+                {this.renderContent()}
+            </LazyLoad>
         </main>
     }
 }

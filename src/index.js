@@ -29,10 +29,11 @@ render(
     </I18nextProvider>,
     document.getElementById('root'),
     () => {
-        let splashScreen = document.getElementById("splashScreen");
+        let splashScreen = document.getElementById("splash-screen");
         if (splashScreen) {
             splashScreen.style.opacity = 0;
             setTimeout(() => {
+                document.body.style.overflow = 'auto';
                 splashScreen.style.display = 'none';
             }, 250)
         }

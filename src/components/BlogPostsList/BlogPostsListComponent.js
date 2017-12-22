@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import classNames from "classnames";
 
+import LazyLoad from 'react-lazyload';
+
 import {translate} from 'react-i18next';
 
 import ReactPaginate from 'react-paginate';
@@ -112,21 +114,23 @@ class BlogPostsListComponent extends React.Component {
 
         return <main className={cls.main}>
             <AppBarComponent/>
-            {this.renderContent()}
-            <div className={cls.pagination}>
-                <ReactPaginate containerClassName={cls.paginationContainer}
-                               pageCount={posts.totalPagesAvailable}
-                               nextClassName={cls.nextLabel}
-                               nextLabel={'navigate_next'}
-                               previousClassName={cls.previousLabel}
-                               previousLabel={'navigate_before'}
-                               pageRangeDisplayed={5}
-                               marginPagesDisplayed={1}
-                               onPageChange={this.props.handleChangePage}
-                               pageClassName={cls.pageClassName}
-                               activeClassName={cls.activeClassName}
-                               forcePage={currentPage - 1}/>
-            </div>
+            <LazyLoad once height={'100%'}>
+                {this.renderContent()}
+                <div className={cls.pagination}>
+                    <ReactPaginate containerClassName={cls.paginationContainer}
+                                   pageCount={posts.totalPagesAvailable}
+                                   nextClassName={cls.nextLabel}
+                                   nextLabel={'navigate_next'}
+                                   previousClassName={cls.previousLabel}
+                                   previousLabel={'navigate_before'}
+                                   pageRangeDisplayed={5}
+                                   marginPagesDisplayed={1}
+                                   onPageChange={this.props.handleChangePage}
+                                   pageClassName={cls.pageClassName}
+                                   activeClassName={cls.activeClassName}
+                                   forcePage={currentPage - 1}/>
+                </div>
+            </LazyLoad>
         </main>
     }
 }
