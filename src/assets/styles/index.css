@@ -102,7 +102,10 @@ main.main--showing-nav-bar {
   margin: auto;
   border-radius: 2px;
   align-items: center; }
-  @media (min-width: 40em) {
+  @media (min-width: 42em) {
+    .pagination {
+      width: 75%; } }
+  @media (min-width: 120em) {
     .pagination {
       width: 50%; } }
   .pagination__container {

@@ -10,7 +10,11 @@
   border-radius: 2px;
   align-items: center;
 
-  @media (min-width: 40em) {
+  @media(min-width: 42em) {
+    width: 75%;
+  }
+
+  @media(min-width: 120em) {
     width: 50%;
   }
 

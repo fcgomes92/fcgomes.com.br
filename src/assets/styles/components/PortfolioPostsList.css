@@ -1,11 +1,20 @@
 .portfolio-posts-list__cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; }
+  justify-content: center;
+  width: 98%;
+  margin: auto; }
+  @media (min-width: 64em) {
+    .portfolio-posts-list__cards {
+      width: 75%; } }
+  @media (min-width: 120em) {
+    .portfolio-posts-list__cards {
+      width: 50%; } }
 
 .portfolio-posts-list__card {
   flex-basis: 90%;
-  margin: .8em auto; }
+  margin: .8em auto;
+  flex-grow: 1; }
   @media (min-width: 32em) {
     .portfolio-posts-list__card {
       flex-basis: 40%;
