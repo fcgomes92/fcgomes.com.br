@@ -379,6 +379,10 @@ class AppComponent extends React.Component {
                             rel="noopener noreferrer"
                             target="_blank"
                             class="${cls.link}"">${t('reactToolbox')}</a>`,
+                            reduxLink: `<a href="https://redux.js.org/"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            class="${cls.link}"">${t('redux')}</a>`,
                         })
                     }}/>
                     <p className={cls.aboutText}>{t('aboutText2')}</p>

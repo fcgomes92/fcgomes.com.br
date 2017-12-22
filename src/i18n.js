@@ -21,7 +21,7 @@ i18n.use(LanguageDetector).init({
 
                 aboutMusicUrl: 'https://www.youtube.com/watch?v=gnFuq-raWio',
                 aboutText0: "This is my ({{- twitterLink}}) personal website where you can find things like my {{- portfolioLink}} and my {{- contactLink}} info. You can also check my {{- blogPostsLink}}.",
-                aboutText1: "The whole site is built using {{- reactLink}} and {{- reactToolboxLink}}.",
+                aboutText1: "The whole site is built using {{- reactLink}}, {{- reactToolboxLink}} and {{- reduxLink}}.",
                 aboutText2: "Hope you enjoy it. (:",
 
                 contactSectionTitle: 'Contact: Melody Calling',
@@ -45,6 +45,7 @@ i18n.use(LanguageDetector).init({
 
                 react: 'React',
                 reactToolbox: 'React Toolbox',
+                redux: 'Redux',
 
                 errorLoadingBlogPostsTitle: 'Ops!',
                 errorLoadingBlogPosts: 'It seems we had a problem loading the latest blog posts.',
@@ -78,7 +79,7 @@ i18n.use(LanguageDetector).init({
 
                 aboutMusicUrl: 'https://www.youtube.com/watch?v=gnFuq-raWio',
                 aboutText0: "Este é meu ({{- twitterLink}}) site pessoal, onde você pode encontrar coisas como meu {{- portfolioLink}} e minhas informações de {{- contactLink}}. Você também pode ver aqui os {{- blogPostsLink}}.",
-                aboutText1: "O site todo é feito utilizando {{- reactLink}} e {{- reactToolboxLink}}.",
+                aboutText1: "O site todo é feito utilizando {{- reactLink}}, {{- reactToolboxLink}} e {{- reduxLink}}.",
                 aboutText2: "Espero que você goste. (:",
 
                 contactSectionTitle: 'Contato: Melody Calling',
@@ -102,6 +103,7 @@ i18n.use(LanguageDetector).init({
 
                 react: 'React',
                 reactToolbox: 'React Toolbox',
+                redux: 'Redux',
 
                 errorLoadingBlogPostsTitle: 'Ops!',
                 errorLoadingBlogPosts: 'Parece que houve algum problema na hora de carregar os artigos.',
