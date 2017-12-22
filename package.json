@@ -20,6 +20,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-i18next": "^7.0.2",
+    "react-lazyload": "^2.3.0",
     "react-paginate": "^5.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",

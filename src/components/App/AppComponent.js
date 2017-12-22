@@ -24,10 +24,13 @@ import '../../assets/styles/index.css';
 import ScrollSpy from "../ScrollSpy/ScrollSpyComponent";
 import IconLogo from "../svg/IconLogo";
 
+import LazyLoad, {lazyload} from 'react-lazyload';
+
 import AppBarComponent from "../AppBar/AppBarComponent";
 import LoaderComponent from "../Loader/LoaderComponent";
 import FooterComponent from "../Footer/FooterComponent";
 import {URLS} from "../../urls";
+
 
 class AppComponent extends React.Component {
     static AMOUNT_OF_PORTFOLIO_POSTS = 3;
@@ -349,93 +352,105 @@ class AppComponent extends React.Component {
                 </section>
 
                 <section className={cls.aboutSection} id={"about"} ref={"about"}>
-                    <Link href={t('aboutTitleLink')}
-                          className={cls.aboutTitle}
-                          target={"_blank"}
-                          rel="noopener noreferrer">
-                        <span>{t('aboutTitle')}</span>
-                    </Link>
-                    <p className={cls.aboutText} dangerouslySetInnerHTML={{
-                        __html: t('aboutText0', {
-                            twitterLink: `<a href="${t('twitterUrl')}"
+                    <LazyLoad height={'100%'} offset={50} once>
+                        <Link href={t('aboutTitleLink')}
+                              className={cls.aboutTitle}
+                              target={"_blank"}
+                              rel="noopener noreferrer">
+                            <span>{t('aboutTitle')}</span>
+                        </Link>
+                        <p className={cls.aboutText} dangerouslySetInnerHTML={{
+                            __html: t('aboutText0', {
+                                twitterLink: `<a href="${t('twitterUrl')}"
                             class="${cls.link}"
                             rel="noopener noreferrer"
                             target="_blank">${t('twitterUsername')}</a>`,
-                            portfolioLink: `<a href="#portfolio"
+                                portfolioLink: `<a href="#portfolio"
                             class="${cls.link}">${t('portfolio')}</a>`,
-                            contactLink: `<a href="#contact"
+                                contactLink: `<a href="#contact"
                             class="${cls.link}"">${t('contact')}</a>`,
-                            blogPostsLink: `<a href="#blog"
+                                blogPostsLink: `<a href="#blog"
                             class="${cls.link}"">${t('blogPosts')}</a>`,
-                        })
-                    }}/>
-                    <p className={cls.aboutText} dangerouslySetInnerHTML={{
-                        __html: t('aboutText1', {
-                            reactLink: `<a href="//reactjs.org/"
+                            })
+                        }}/>
+                        <p className={cls.aboutText} dangerouslySetInnerHTML={{
+                            __html: t('aboutText1', {
+                                reactLink: `<a href="//reactjs.org/"
                             rel="noopener noreferrer"
                             target="_blank"
                             class="${cls.link}">${t('react')}</a>`,
-                            reactToolboxLink: `<a href="//react-toolbox.io/"
+                                reactToolboxLink: `<a href="//react-toolbox.io/"
                             rel="noopener noreferrer"
                             target="_blank"
                             class="${cls.link}"">${t('reactToolbox')}</a>`,
-                            reduxLink: `<a href="https://redux.js.org/"
+                                reduxLink: `<a href="https://redux.js.org/"
                             rel="noopener noreferrer"
                             target="_blank"
                             class="${cls.link}"">${t('redux')}</a>`,
-                        })
-                    }}/>
-                    <p className={cls.aboutText}>{t('aboutText2')}</p>
+                            })
+                        }}/>
+                        <p className={cls.aboutText}>{t('aboutText2')}</p>
+                    </LazyLoad>
                 </section>
-
                 <section className={cls.portfolioSection} id={"portfolio"} ref={"portfolio"}>
-                    <Link href={t('portfolioSectionTitleLink')}
-                          target={'_blank'}
-                          rel="noopener noreferrer"
-                          className={cls.portfolioTitle}>
-                        <span>{t('portfolioSectionTitle')}</span>
-                    </Link>
-                    {this.renderPortfolioSection()}
-                    <LinkDOM className={cls.readMoreLink} to={URLS.portfolioList()}><Button className={'button--md'} label={t('readMore')} flat accent/></LinkDOM>
+                    <LazyLoad height={'100%'} offset={50} once>
+                        <Link href={t('portfolioSectionTitleLink')}
+                              target={'_blank'}
+                              rel="noopener noreferrer"
+                              className={cls.portfolioTitle}>
+                            <span>{t('portfolioSectionTitle')}</span>
+                        </Link>
+                        {this.renderPortfolioSection()}
+                        <LinkDOM className={cls.readMoreLink} to={URLS.portfolioList()}><Button className={'button--md'} label={t('readMore')} flat accent/></LinkDOM>
+                    </LazyLoad>
                 </section>
 
                 <section className={cls.blogSection} id={"blog"}>
-                    <Link href={t('blogSectionTitleLink')}
-                          target={'_blank'}
-                          rel="noopener noreferrer"
-                          className={cls.blogSectionTitle}>
-                        <span>{t('blogSectionTitle')}</span>
-                    </Link>
-                    {this.renderBlogSection()}
-                    <LinkDOM className={cls.readMoreLink} to={URLS.blogList()}><Button className={'button--md'} label={t('readMore')} flat accent/></LinkDOM>
+                    <LazyLoad height={'100%'} offset={50} once>
+                        <Link href={t('blogSectionTitleLink')}
+                              target={'_blank'}
+                              rel="noopener noreferrer"
+                              className={cls.blogSectionTitle}>
+                            <span>{t('blogSectionTitle')}</span>
+                        </Link>
+                        {this.renderBlogSection()}
+                        <LinkDOM className={cls.readMoreLink} to={URLS.blogList()}><Button className={'button--md'} label={t('readMore')} flat accent/></LinkDOM>
+                    </LazyLoad>
                 </section>
 
                 <section className={cls.contactSection} id={"contact"} ref={"contact"}>
-                    <Link href={t('contactSectionTitleLink')}
-                          target={'_blank'}
-                          rel="noopener noreferrer"
-                          className={cls.contactTitle}>
-                        <span>{t('contactSectionTitle')}</span>
-                    </Link>
-                    <div className={cls.contactLinks}>
-                        <Link href={t('twitterUrl')} target={'__blank'} className={cls.contactLink} rel="noopener noreferrer">
-                            <i className={cls.contactLinkIconTwitter} aria-hidden="true"/>
-                            <span>{t('twitterUsername')}</span>
+                    <LazyLoad height={'100%'} offset={50} once>
+                        <Link href={t('contactSectionTitleLink')}
+                              target={'_blank'}
+                              rel="noopener noreferrer"
+                              className={cls.contactTitle}>
+                            <span>{t('contactSectionTitle')}</span>
                         </Link>
-                        <Link href={t('emailUrl')} target={'__blank'} className={cls.contactLink} rel="noopener noreferrer">
-                            <i className={cls.contactLinkIconEmail} aria-hidden="true"/>
-                            <span>{t('emailAddress')}</span>
-                        </Link>
-                        <Link href={t('githubUrl')} target={'__blank'} className={cls.contactLink} rel="noopener noreferrer">
-                            <i className={cls.contactLinkIconGitHub} aria-hidden="true"/>
-                            <span>{t('githubUsername')}</span>
-                        </Link>
-                    </div>
+                        <div className={cls.contactLinks}>
+                            <Link href={t('twitterUrl')} target={'__blank'} className={cls.contactLink} rel="noopener noreferrer">
+                                <i className={cls.contactLinkIconTwitter} aria-hidden="true"/>
+                                <span>{t('twitterUsername')}</span>
+                            </Link>
+                            <Link href={t('emailUrl')} target={'__blank'} className={cls.contactLink} rel="noopener noreferrer">
+                                <i className={cls.contactLinkIconEmail} aria-hidden="true"/>
+                                <span>{t('emailAddress')}</span>
+                            </Link>
+                            <Link href={t('githubUrl')} target={'__blank'} className={cls.contactLink} rel="noopener noreferrer">
+                                <i className={cls.contactLinkIconGitHub} aria-hidden="true"/>
+                                <span>{t('githubUsername')}</span>
+                            </Link>
+                        </div>
+                    </LazyLoad>
                 </section>
-                <FooterComponent/>
+                <LazyLoad height={200} once throttle={5000} debounce={5000} placeholder={<LoaderComponent/>}>
+                    <FooterComponent/>
+                </LazyLoad>
             </main>
         )
     }
 }
 
-export default translate('translations')(AppComponent);
+export default lazyload({
+    height: '100%',
+    once: true
+})(translate('translations')(AppComponent));
