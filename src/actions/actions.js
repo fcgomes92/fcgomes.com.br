@@ -9,7 +9,10 @@ import {
     UPDATE_PORTFOLIO_POSTS_LOADING,
     UPDATE_PORTFOLIO_POSTS_ERROR,
     UPDATE_PORTFOLIO_POSTS,
-    UPDATE_PORTFOLIO_POSTS_TOTAL_PAGES, ADD_PORTFOLIO_POST,
+    UPDATE_PORTFOLIO_POSTS_TOTAL_PAGES,
+    ADD_PORTFOLIO_POST,
+    ADD_BLOG_POST,
+    UPDATE_BLOG_POSTS_TOTAL_PAGES
 } from './actionTypes';
 
 
@@ -51,12 +54,16 @@ const normalizePosts = async (posts) => {
     }
 };
 
+
+// blog actions
 export const getBlogPosts = (perPage = 6, page = 1) => {
     return async (dispatch, getState) => {
+        // set the blog posts as loading
         dispatch({
             type: UPDATE_BLOG_POSTS_LOADING,
             payload: true,
         });
+
         try {
             let payload = [];
 
@@ -73,6 +80,7 @@ export const getBlogPosts = (perPage = 6, page = 1) => {
 
             // if response is successful: normalize the posts
             if (!response.ok) {
+                // set the error loading the blog posts
                 dispatch({
                     type: UPDATE_BLOG_POSTS_ERROR,
                     payload: true,
@@ -81,11 +89,20 @@ export const getBlogPosts = (perPage = 6, page = 1) => {
             } else {
                 payload = await normalizePosts(await response.json());
 
+                // update all blog posts
                 dispatch({
                     type: UPDATE_BLOG_POSTS,
                     payload: payload,
                 });
 
+                // set the total amount of pages available
+                let totalPages = response.headers.get('X-WP-TotalPages') || 1;
+                dispatch({
+                    type: UPDATE_BLOG_POSTS_TOTAL_PAGES,
+                    payload: totalPages,
+                });
+
+                // set the posts loading as false
                 dispatch({
                     type: UPDATE_BLOG_POSTS_LOADING,
                     payload: false,
@@ -94,6 +111,7 @@ export const getBlogPosts = (perPage = 6, page = 1) => {
                 return payload;
             }
         } catch (e) {
+            // set the error loading the blog posts
             dispatch({
                 type: UPDATE_BLOG_POSTS_ERROR,
                 payload: true,
@@ -101,13 +119,79 @@ export const getBlogPosts = (perPage = 6, page = 1) => {
             console.error(e);
         }
 
+        // set the posts loading as false
         dispatch({
             type: UPDATE_BLOG_POSTS_LOADING,
-            payload: false,
+            payload: true,
         });
     }
 };
 
+export const getBlogPostById = (postId) => {
+    return async (dispatch, getState) => {
+        // set the blog posts as loading
+        dispatch({
+            type: UPDATE_BLOG_POSTS_LOADING,
+            payload: true,
+        });
+
+        try {
+            let payload = {};
+
+            // reset previous fetch errors
+            dispatch({
+                type: UPDATE_BLOG_POSTS_ERROR,
+                payload: false,
+            });
+
+            // fetch the blog posts
+            let response = await fetch(`${CMS_URL}/posts/${postId}?_embed`, {
+                method: 'GET',
+            });
+
+            // if response is successful: normalize the posts
+            if (!response.ok) {
+                // set the error loading the blog posts
+                dispatch({
+                    type: UPDATE_BLOG_POSTS_ERROR,
+                    payload: true,
+                });
+                console.error(await response.json())
+            } else {
+                payload = await normalizePosts(await response.json());
+
+                // update all blog posts
+                dispatch({
+                    type: ADD_BLOG_POST,
+                    payload: payload,
+                });
+
+                // set the posts loading as false
+                dispatch({
+                    type: UPDATE_BLOG_POSTS_LOADING,
+                    payload: false,
+                });
+
+                return payload;
+            }
+        } catch (e) {
+            // set the error loading the blog posts
+            dispatch({
+                type: UPDATE_BLOG_POSTS_ERROR,
+                payload: true,
+            });
+            console.error(e);
+        }
+
+        // set the posts loading as false
+        dispatch({
+            type: UPDATE_BLOG_POSTS_LOADING,
+            payload: true,
+        });
+    }
+};
+
+// portfolio actions
 export const getPortfolioPosts = (perPage = 4, page = 1) => {
     return async (dispatch, getState) => {
         // set the portfolio posts as loading

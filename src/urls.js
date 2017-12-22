@@ -10,6 +10,7 @@ export const URLS = {
     portfolioListPage: (page = 1) => `/portfolio?page=${page}`,
     portfolioDetail: (postId = ':postId') => `/portfolio/${postId}`,
     blogList: () => `/blog`,
+    blogListPage: (page = 1) => `/blog?page=${page}`,
     blogDetail: (postId = ':postId') => `/blog/${postId}`,
 };
 

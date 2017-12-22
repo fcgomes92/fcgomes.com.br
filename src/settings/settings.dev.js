@@ -1,4 +1,4 @@
-export const VERSION = 'DEV 2.1.1';
+export const VERSION = 'DEV 2.1.2';
 
 export const DEBUG = true;
 

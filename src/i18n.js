@@ -56,6 +56,7 @@ i18n.use(LanguageDetector).init({
                 noBlogPostsYet: 'I\'m still writing some blog posts. Soon we\'ll have some here!',
 
                 morePortfolioPosts: 'More Portfolio Posts',
+                moreBlogPosts: 'More Blog Posts',
 
                 version: 'Version',
             },
@@ -110,6 +111,9 @@ i18n.use(LanguageDetector).init({
                 noPortfolioPostsYet: 'Eu ainda estou elaborando os posts de portfolio. Em breve teremos alguns.',
                 noBlogPostsYetTitle: 'Nenhum artigo encontrado.',
                 noBlogPostsYet: 'Eu ainda estou escrevendo os artigos. Em breve teremos alguns.',
+
+                morePortfolioPosts: 'Ver mais portfolio',
+                moreBlogPosts: 'Ver mais postagens',
 
                 version: 'Versão',
             },
