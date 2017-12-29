@@ -168,7 +168,9 @@ class AppComponent extends React.Component {
                                     <p dangerouslySetInnerHTML={{__html: post.excerpt}}></p>
                                 </CardText>
                                 <CardActions>
-                                    <Button label={t('readMore')} flat primary/>
+                                    <LinkDOM to={URLS.blogDetail(post.id)}>
+                                        <Button label={t('readMore')} flat primary/>
+                                    </LinkDOM>
                                 </CardActions>
                             </Card>
                         )
