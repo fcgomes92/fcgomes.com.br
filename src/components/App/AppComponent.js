@@ -30,7 +30,6 @@ import FooterComponent from "../Footer/FooterComponent";
 import {URLS} from "../../urls";
 
 class AppComponent extends React.Component {
-    static AMOUNT_OF_PORTFOLIO_POSTS = 3;
     static AMOUNT_OF_BLOG_POSTS = 5;
 
     static propTypes = {
@@ -39,8 +38,6 @@ class AppComponent extends React.Component {
         history: PropTypes.object,
         location: PropTypes.object,
         blogPosts: PropTypes.object,
-        portfolioPosts: PropTypes.object,
-        loadPortfolioPosts: PropTypes.func,
         loadBlogPosts: PropTypes.func,
     };
 
@@ -58,13 +55,11 @@ class AppComponent extends React.Component {
             scrollSpySections: [
                 ReactDOM.findDOMNode(this.refs.hero),
                 ReactDOM.findDOMNode(this.refs.about),
-                ReactDOM.findDOMNode(this.refs.portfolio),
                 ReactDOM.findDOMNode(this.refs.contact),
             ],
         });
 
         this.handleLoadBlogPosts();
-        this.handleLoadPortfolioPosts();
     }
 
     handleOnSectionChange = (section) => {
@@ -78,117 +73,6 @@ class AppComponent extends React.Component {
     handleLoadBlogPosts = () => {
         if (this.props.loadBlogPosts) {
             this.props.loadBlogPosts(AppComponent.AMOUNT_OF_BLOG_POSTS);
-        }
-    };
-
-    handleLoadPortfolioPosts = () => {
-        if (this.props.loadPortfolioPosts) {
-            this.props.loadPortfolioPosts(AppComponent.AMOUNT_OF_PORTFOLIO_POSTS);
-        }
-    };
-
-    renderPortfolioSection = () => {
-        const {t, portfolioPosts} = this.props;
-
-        if (!portfolioPosts) {
-            return null;
-        }
-
-        const cls = {
-            portfolioCards: 'portfolio-section__cards',
-            portfolioCard: 'portfolio-section__card animated fadeInDown',
-            portfolioCardImage: 'portfolio-section__card__image',
-            portfolioCardExcerpt: 'portfolio-section__card__excerpt',
-            portfolioLoading: 'portfolio-section__loading',
-        };
-
-        if (portfolioPosts.loading) {
-            return (
-                <div className={cls.portfolioLoading}>
-                    <LoaderComponent accent/>
-                    <span>{t('loading')}</span>
-                </div>
-            );
-        }
-        if (portfolioPosts.error) {
-            return (
-                <div className={cls.portfolioCards}>
-                    <Card key={`__portfolio_post_card__000`}
-                          className={classNames(cls.portfolioCard, {
-                              [`portfolio-section__cards__card--delay-animation-0s`]: true,
-                          })}>
-                        <CardTitle title={t('errorLoadingPortfolioPostsTitle')}/>
-                        <CardMedia image={SVGCat}
-                                   aspectRatio="square"
-                                   className={cls.portfolioCardImage}>
-                            <small>
-                                <Link href={'https://www.freepik.com/free-vector/several-dog-and-cat-emoticons-in-flat-design_1002049.htm'}
-                                      target={'__blank'}
-                                      className={cls.linkAccent}
-                                      rel="noopener noreferrer">Designed by Freepik</Link>
-                            </small>
-                        </CardMedia>
-                        <CardText>
-                            <p>{t('errorLoadingPortfolioPosts')}</p>
-                        </CardText>
-                    </Card>
-                </div>
-            );
-        } else if (portfolioPosts.ids.length === 0) {
-            return (
-                <div className={cls.portfolioCards}>
-                    <Card key={`__portfolio_post_card__000`}
-                          className={classNames(cls.portfolioCard, {
-                              [`portfolio-section__cards__card--delay-animation-0s`]: true,
-                          })}>
-                        <CardTitle title={t('noPortfolioPostsYetTitle')}/>
-                        <CardMedia image={SVGCat}
-                                   aspectRatio="square"
-                                   className={cls.portfolioCardImage}>
-                            <small>
-                                <Link href={'https://www.freepik.com/free-vector/several-dog-and-cat-emoticons-in-flat-design_1002049.htm'}
-                                      target={'__blank'}
-                                      className={cls.linkAccent}
-                                      rel="noopener noreferrer">Designed by Freepik</Link>
-                            </small>
-                        </CardMedia>
-                        <CardText>
-                            <p>{t('noPortfolioPostsYet')}</p>
-                        </CardText>
-                    </Card>
-                </div>
-            )
-        } else {
-            return (
-                <div className={cls.portfolioCards}>
-                    {portfolioPosts.ids.map((postId, idx) => {
-                        if (idx >= AppComponent.AMOUNT_OF_PORTFOLIO_POSTS) {
-                            return null;
-                        } else {
-                            let post = portfolioPosts.byId[postId];
-                            return (
-                                <Card key={`__portfolio_post_card__${idx}`}
-                                      className={classNames(cls.portfolioCard, {
-                                          [`portfolio-section__cards__card--delay-animation-0s`]: true,
-                                      })}>
-                                    <CardTitle title={post.title}/>
-                                    <CardMedia image={post.featured_image}
-                                               aspectRatio="square"
-                                               className={cls.portfolioCardImage}/>
-                                    <CardText className={cls.portfolioCardExcerpt}>
-                                        <p dangerouslySetInnerHTML={{__html: post.excerpt}}></p>
-                                    </CardText>
-                                    <CardActions>
-                                        <LinkDOM to={URLS.portfolioDetail(postId)}>
-                                            <Button label={t('readMore')} flat primary/>
-                                        </LinkDOM>
-                                    </CardActions>
-                                </Card>
-                            )
-                        }
-                    })}
-                </div>
-            )
         }
     };
 
@@ -309,8 +193,6 @@ class AppComponent extends React.Component {
             aboutSection: 'full-height about-section',
             aboutTitle: 'about-section__title link link--primary',
             aboutText: 'about-section__text',
-            portfolioSection: 'full-height portfolio-section',
-            portfolioTitle: 'portfolio-section__title link link--primary',
             contactSection: 'full-height contact-section',
             contactTitle: 'contact-section__title link link--primary',
             contactLinks: 'contact-section__links',
@@ -342,7 +224,6 @@ class AppComponent extends React.Component {
                     </div>
                     <div className={cls.bannerLinks}>
                         <Link href={'#about'} label={t('about')} className={cls.link}/>
-                        <Link href={'#portfolio'} label={t('portfolio')} className={cls.link}/>
                         <Link href={'#contact'} label={t('contact')} className={cls.link}/>
                         <Link href={'#blog'} label={t('blogPosts')} className={cls.link}/>
                     </div>
@@ -361,8 +242,6 @@ class AppComponent extends React.Component {
                             class="${cls.link}"
                             rel="noopener noreferrer"
                             target="_blank">${t('twitterUsername')}</a>`,
-                            portfolioLink: `<a href="#portfolio"
-                            class="${cls.link}">${t('portfolio')}</a>`,
                             contactLink: `<a href="#contact"
                             class="${cls.link}"">${t('contact')}</a>`,
                             blogPostsLink: `<a href="#blog"
@@ -386,17 +265,6 @@ class AppComponent extends React.Component {
                         })
                     }}/>
                     <p className={cls.aboutText}>{t('aboutText2')}</p>
-                </section>
-
-                <section className={cls.portfolioSection} id={"portfolio"} ref={"portfolio"}>
-                    <Link href={t('portfolioSectionTitleLink')}
-                          target={'_blank'}
-                          rel="noopener noreferrer"
-                          className={cls.portfolioTitle}>
-                        <span>{t('portfolioSectionTitle')}</span>
-                    </Link>
-                    {this.renderPortfolioSection()}
-                    <LinkDOM className={cls.readMoreLink} to={URLS.portfolioList()}><Button className={'button--md'} label={t('readMore')} flat accent/></LinkDOM>
                 </section>
 
                 <section className={cls.blogSection} id={"blog"}>
