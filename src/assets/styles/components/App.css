@@ -85,64 +85,6 @@
     width: 90%;
     text-align: center; }
 
-.portfolio-section {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center; }
-  .portfolio-section__title, .portfolio-section__subtitle {
-    text-align: center;
-    color: #ffffff; }
-    .portfolio-section__title span, .portfolio-section__subtitle span {
-      line-height: 160%; }
-  .portfolio-section__title {
-    margin-top: 1.6em; }
-    .portfolio-section__title span {
-      font-size: 3.2em; }
-      @media (min-width: 32em) {
-        .portfolio-section__title span {
-          font-size: 4.8em; } }
-  .portfolio-section__subtitle {
-    margin-bottom: 1.6em; }
-    .portfolio-section__subtitle span {
-      font-size: 1.6em; }
-      @media (min-width: 32em) {
-        .portfolio-section__subtitle span {
-          font-size: 3.2em; } }
-  .portfolio-section__cards {
-    padding: 1.6em;
-    margin: 1.6em 0;
-    display: flex;
-    align-items: stretch;
-    justify-content: space-around;
-    flex-wrap: wrap; }
-  .portfolio-section__card {
-    background: #FFF;
-    border-radius: .4em;
-    margin: 1.6em;
-    flex-basis: 100%; }
-    @media (min-width: 32em) {
-      .portfolio-section__card {
-        flex-basis: 25%; } }
-    .portfolio-section__card__image {
-      max-height: 16em; }
-    .portfolio-section__card__excerpt {
-      flex-grow: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: flex; }
-      .portfolio-section__card__excerpt p {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap; }
-  .portfolio-section__loading {
-    display: flex;
-    flex-direction: column; }
-    .portfolio-section__loading span {
-      text-align: center;
-      color: #ffffff;
-      font-size: 2.4em; }
-
 .contact-section {
   padding: 1.6em;
   margin: 1.6em 0;

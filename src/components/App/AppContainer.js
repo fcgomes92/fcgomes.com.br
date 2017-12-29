@@ -5,11 +5,10 @@ import {connect} from 'react-redux';
 
 import AppComponent from './AppComponent';
 
-import {getBlogPosts, getPortfolioPosts} from '../../actions/actions';
+import {getBlogPosts} from '../../actions/actions';
 
 const mapStateToProps = (state, ownProps) => ({
     blogPosts: state.blogPosts,
-    portfolioPosts: state.portfolioPosts,
 });
 
 class AppContainer extends React.Component {
@@ -17,11 +16,6 @@ class AppContainer extends React.Component {
         history: PropTypes.object,
         location: PropTypes.object,
         getBlogPosts: PropTypes.func,
-        getPortfolioPosts: PropTypes.func
-    };
-
-    handleLoadPortfolioPosts = async (amount) => {
-        return await this.props.getPortfolioPosts(amount);
     };
 
     handleLoadBlogPosts = async (amount) => {
@@ -29,17 +23,14 @@ class AppContainer extends React.Component {
     };
 
     render() {
-        const {blogPosts, portfolioPosts, history, location} = this.props;
+        const {blogPosts, history, location} = this.props;
         return <AppComponent blogPosts={blogPosts}
                              history={history}
                              location={location}
-                             portfolioPosts={portfolioPosts}
-                             loadBlogPosts={this.handleLoadBlogPosts}
-                             loadPortfolioPosts={this.handleLoadPortfolioPosts}/>
+                             loadBlogPosts={this.handleLoadBlogPosts}/>
     }
 }
 
 export default connect(mapStateToProps, {
     getBlogPosts,
-    getPortfolioPosts,
 })(AppContainer);
