@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import '../../assets/styles/components/Loader.css';
 
 import classNames from 'classnames';
 
