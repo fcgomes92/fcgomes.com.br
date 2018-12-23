@@ -180,3 +180,4 @@ build/
 
 .next
 yarn.lock
+.next/
