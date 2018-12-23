@@ -3,23 +3,33 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import Head from 'next/head';
 
-import css from 'styled-jsx/css'
+import injectSheet from 'react-jss'
 
-import I18n from '../src/i18n'
 import registerServiceWorker from '../src/registerServiceWorker';
+import I18n from '../src/i18n'
+import Title from '../src/components/Title/Title';
 
-const styles = css.global`
-html, body {
-  font-family: Roboto, serif;
-  font-size: 10px;
-  margin: 0;
-  padding: 0;
-}`;
+const styles = {
+  '@global html, @global body': {
+    fontFamily: 'Roboto, serif',
+    fontSize: '10px',
+    margin: 0,
+    padding: 0,
+  },
+};
 
 class MyApp extends App {
   static async getInitialProps() {
     return {
       namespacesRequired: [],
+    }
+  }
+
+  componentDidMount() {
+    const style = document.getElementById('server-side-styles');
+
+    if (style) {
+      style.parentNode.removeChild(style)
     }
   }
 
@@ -49,7 +59,7 @@ class MyApp extends App {
           <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png" />
           <meta name="msapplication-TileImage" content="/static/icons/ms-icon-144x144.png" />
 
-          <link rel="manifest" href="/static/manifest.json" />
+          {/*<link rel="manifest" href="/static/manifest.json" />*/}
           <link rel="shortcut icon" href="/static/favicon.ico" />
 
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -58,7 +68,7 @@ class MyApp extends App {
 
           <script async src="//www.googletagmanager.com/gtag/js?id=UA-86301706-1" />
 
-          <title key="title">FCG</title>
+          <Title />
           <meta name="description" content="FCG" />
           <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -68,13 +78,12 @@ class MyApp extends App {
           <meta name="ogType" property="og:type" content="website" />
           <meta property="og:description" content="A website about software development." />
         </Head>
-        <style jsx global>{styles}</style>
         <Component {...pageProps} />
       </Container>
     )
   }
 }
 
-export default I18n.appWithTranslation(MyApp);
+export default injectSheet(styles)(I18n.appWithTranslation(MyApp));
 
 registerServiceWorker();

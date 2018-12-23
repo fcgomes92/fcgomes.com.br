@@ -1,10 +1,10 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
 import Head from 'next/head';
 
 import Header from '../src/components/Header/Header';
+import Title from '../src/components/Title/Title';
+import LoaderComponent from '../src/components/Loader/LoaderComponent';
 
 class About extends React.Component {
   static async getInitialProps() {
@@ -13,20 +13,14 @@ class About extends React.Component {
     }
   }
 
-  static propTypes = {};
-
-  state = {};
-
   render() {
     return (
       <>
         <Head>
-          <title>ABOUT</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <Title title="HOME" />
         </Head>
         <div>
-          <Header/>
-          <h1>About</h1>
+          <Header />
         </div>
       </>
     );

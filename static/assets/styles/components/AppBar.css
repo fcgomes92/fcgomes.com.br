@@ -1,7 +1,0 @@
-.app-bar {
-  display: none; }
-  .app-bar__icon {
-    width: 100% !important;
-    height: 100% !important; }
-  .app-bar--show {
-    display: block; }
