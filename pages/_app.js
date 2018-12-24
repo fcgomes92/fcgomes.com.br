@@ -8,6 +8,7 @@ import injectSheet from 'react-jss'
 import registerServiceWorker from '../src/registerServiceWorker';
 import I18n from '../src/i18n'
 import Title from '../src/components/Title/Title';
+import withStore from '../lib/withStore';
 
 const styles = {
   '@global html, @global body': {
@@ -84,6 +85,6 @@ class MyApp extends App {
   }
 }
 
-export default injectSheet(styles)(I18n.appWithTranslation(MyApp));
+export default withStore(injectSheet(styles)(I18n.appWithTranslation(MyApp)));
 
 registerServiceWorker();

@@ -4,10 +4,43 @@ import Head from 'next/head';
 
 import Header from '../src/components/Header/Header';
 import Title from '../src/components/Title/Title';
-import LoaderComponent from '../src/components/Loader/LoaderComponent';
 
-class About extends React.Component {
+import AltContainer from 'alt-container';
+import GlobalActions from '../src/alt/actions';
+import GlobalStore from '../src/alt/stores';
+
+class _IsolatedComponent extends React.Component {
+  state = {};
+
+  renderPostLine = (movieId, idx) => {
+    const movie = this.props.films.items[movieId];
+    return (
+      <li key={idx}>{movie.title}</li>
+    )
+  };
+
+  render() {
+    console.log('IC:', GlobalStore.getState());
+    return (
+      <AltContainer store={GlobalStore}>
+        <p>Movies:</p>
+        <ul>
+          {/*{this.props.films.ids.map(this.renderPostLine)}*/}
+        </ul>
+        <pre>
+          {JSON.stringify(this.props, null, 2)}
+        </pre>
+      </AltContainer>
+    )
+  }
+}
+
+const IC = _IsolatedComponent;
+
+
+class Index extends React.Component {
   static async getInitialProps() {
+    await GlobalActions.fetchFilms();
     return {
       namespacesRequired: ['common'],
     }
@@ -19,12 +52,11 @@ class About extends React.Component {
         <Head>
           <Title title="HOME" />
         </Head>
-        <div>
-          <Header />
-        </div>
+        <Header />
+        <IC />
       </>
     );
   }
 }
 
-export default About;
+export default Index;
