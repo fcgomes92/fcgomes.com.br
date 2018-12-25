@@ -9,6 +9,7 @@ import registerServiceWorker from '../src/registerServiceWorker';
 import I18n from '../src/i18n'
 import Title from '../src/components/Title/Title';
 import withStore from '../lib/withStore';
+import GlobalStore from '../src/alt/stores/GlobalStore';
 
 const styles = {
   '@global html, @global body': {
@@ -85,6 +86,8 @@ class MyApp extends App {
   }
 }
 
-export default withStore(injectSheet(styles)(I18n.appWithTranslation(MyApp)));
+const I18nApp = I18n.appWithTranslation(MyApp);
+const StyledApp = injectSheet(styles)(I18nApp);
+export default withStore(StyledApp, [GlobalStore]);
 
 registerServiceWorker();

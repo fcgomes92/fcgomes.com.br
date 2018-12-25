@@ -1,6 +1,10 @@
 import React from 'react'
+
 import Document, { Head, Main, NextScript } from 'next/document'
+
 import { JssProvider, SheetsRegistry } from 'react-jss'
+
+import GlobalStore, { __NEXT_REDUX_STORE__ } from '../src/alt/stores/GlobalStore';
 
 export default class JssDocument extends Document {
   static getInitialProps(ctx) {
@@ -17,6 +21,7 @@ export default class JssDocument extends Document {
     }
   }
 
+
   render() {
     return (
       <html>
@@ -24,6 +29,12 @@ export default class JssDocument extends Document {
         <style id="server-side-styles">
           {this.props.registry.toString()}
         </style>
+        <script
+          id={__NEXT_REDUX_STORE__}
+          dangerouslySetInnerHTML={{
+            __html: `window['${__NEXT_REDUX_STORE__}'] = ${JSON.stringify(GlobalStore.getState())}`,
+          }}
+        />
       </Head>
 
       <body>

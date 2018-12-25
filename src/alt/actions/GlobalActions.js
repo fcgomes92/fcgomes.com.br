@@ -1,4 +1,4 @@
-import alt from '../alt/alt'
+import alt from '../alt'
 
 import axios from 'axios';
 
@@ -16,10 +16,6 @@ class GlobalActions {
 
   fetchFilm(fid) {
 
-  }
-
-  initState(data) {
-    return dispatch => dispatch(data);
   }
 }
 

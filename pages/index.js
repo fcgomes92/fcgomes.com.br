@@ -2,15 +2,20 @@ import React from 'react';
 
 import Head from 'next/head';
 
+import connectToStores from 'alt-utils/lib/connectToStores'
+
 import Header from '../src/components/Header/Header';
 import Title from '../src/components/Title/Title';
-
-import AltContainer from 'alt-container';
-import GlobalActions from '../src/alt/actions';
-import GlobalStore from '../src/alt/stores';
+import GlobalActions from '../src/alt/actions/GlobalActions';
+import GlobalStore from '../src/alt/stores/GlobalStore';
+import LoaderComponent from '../src/components/Loader/LoaderComponent';
 
 class _IsolatedComponent extends React.Component {
   state = {};
+
+  static getStores = () => [GlobalStore];
+
+  static getPropsFromStores = () => GlobalStore.getState();
 
   renderPostLine = (movieId, idx) => {
     const movie = this.props.films.items[movieId];
@@ -20,31 +25,57 @@ class _IsolatedComponent extends React.Component {
   };
 
   render() {
-    console.log('IC:', GlobalStore.getState());
+    if (this.props.loading) {
+      return <LoaderComponent />
+    }
     return (
-      <AltContainer store={GlobalStore}>
+      <>
         <p>Movies:</p>
         <ul>
-          {/*{this.props.films.ids.map(this.renderPostLine)}*/}
+          {this.props.films.ids.map(this.renderPostLine)}
         </ul>
         <pre>
           {JSON.stringify(this.props, null, 2)}
         </pre>
-      </AltContainer>
+      </>
     )
   }
 }
 
-const IC = _IsolatedComponent;
+const IC = connectToStores(_IsolatedComponent);
 
 
 class Index extends React.Component {
-  static async getInitialProps() {
-    await GlobalActions.fetchFilms();
+  static async getInitialProps({ req }) {
+    if (req) {
+      await GlobalActions.fetchFilms();
+    }
     return {
+      serverInitialized: Boolean(req),
       namespacesRequired: ['common'],
     }
   }
+
+  state = {
+    loadingFilms: false,
+  };
+
+  constructor(props) {
+    super(props);
+    this.serverInitialized = props.serverInitialized;
+  }
+
+  componentDidMount() {
+    if (!this.serverInitialized) {
+      this.handleFetchData();
+    }
+  }
+
+  handleFetchData = async () => {
+    await this.setState({ loadingFilms: true });
+    await GlobalActions.fetchFilms();
+    await this.setState({ loadingFilms: false });
+  };
 
   render() {
     return (
@@ -53,7 +84,7 @@ class Index extends React.Component {
           <Title title="HOME" />
         </Head>
         <Header />
-        <IC />
+        <IC loading={this.state.loadingFilms} />
       </>
     );
   }
