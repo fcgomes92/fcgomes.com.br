@@ -9,6 +9,7 @@ import Title from '../src/components/Title/Title';
 import GlobalActions from '../src/alt/actions/GlobalActions';
 import GlobalStore from '../src/alt/stores/GlobalStore';
 import LoaderComponent from '../src/components/Loader/LoaderComponent';
+import { isServer } from '../src/settings/const';
 
 class _IsolatedComponent extends React.Component {
   state = {};
@@ -46,12 +47,13 @@ const IC = connectToStores(_IsolatedComponent);
 
 
 class Index extends React.Component {
-  static async getInitialProps({ req }) {
-    if (req) {
+  static async getInitialProps() {
+    const _isServer = isServer();
+    if (_isServer) {
       await GlobalActions.fetchFilms();
     }
     return {
-      serverInitialized: Boolean(req),
+      serverInitialized: _isServer,
       namespacesRequired: ['common'],
     }
   }
@@ -60,13 +62,8 @@ class Index extends React.Component {
     loadingFilms: false,
   };
 
-  constructor(props) {
-    super(props);
-    this.serverInitialized = props.serverInitialized;
-  }
-
   componentDidMount() {
-    if (!this.serverInitialized) {
+    if (!this.props.serverInitialized) {
       this.handleFetchData();
     }
   }

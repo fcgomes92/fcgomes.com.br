@@ -22,14 +22,8 @@ const styles = {
 };
 
 class MyApp extends App {
-  static async getInitialProps() {
-    return {
-      namespacesRequired: [],
-    }
-  }
-
   componentDidMount() {
-    if (!isServer) {
+    if (!isServer()) {
       const style = document.getElementById('server-side-styles');
 
       if (style) {

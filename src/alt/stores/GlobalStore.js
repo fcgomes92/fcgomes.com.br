@@ -19,7 +19,7 @@ class GlobalStore {
   }
 
   static initStore(data = GlobalStore.INITIAL_DATA) {
-    if (isServer) {
+    if (isServer()) {
       return data;
     } else {
       return window[__NEXT_REDUX_STORE__] ? window[__NEXT_REDUX_STORE__] : data;
