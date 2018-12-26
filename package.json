@@ -23,9 +23,11 @@
   "scripts": {
     "dev": "NODE_ENV=development node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "deploy": "now"
   },
   "devDependencies": {
+    "now": "^12.1.14",
     "react-perf-devtool": "^3.1.8"
   }
 }

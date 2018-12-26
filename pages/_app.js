@@ -6,10 +6,11 @@ import Head from 'next/head';
 import injectSheet from 'react-jss'
 
 import registerServiceWorker from '../src/registerServiceWorker';
-import I18n from '../src/i18n'
+// import I18n from '../src/i18n'
 import Title from '../src/components/Title/Title';
 import withStore from '../lib/withStore';
 import GlobalStore from '../src/alt/stores/GlobalStore';
+import { isServer } from '../src/settings/const';
 
 const styles = {
   '@global html, @global body': {
@@ -28,10 +29,12 @@ class MyApp extends App {
   }
 
   componentDidMount() {
-    const style = document.getElementById('server-side-styles');
+    if (!isServer) {
+      const style = document.getElementById('server-side-styles');
 
-    if (style) {
-      style.parentNode.removeChild(style)
+      if (style) {
+        style.parentNode.removeChild(style)
+      }
     }
   }
 
@@ -86,8 +89,8 @@ class MyApp extends App {
   }
 }
 
-const I18nApp = I18n.appWithTranslation(MyApp);
-const StyledApp = injectSheet(styles)(I18nApp);
+// const I18nApp = I18n.appWithTranslation(MyApp);
+const StyledApp = injectSheet(styles)(MyApp);
 export default withStore(StyledApp, [GlobalStore]);
 
 registerServiceWorker();
