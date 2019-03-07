@@ -3,35 +3,11 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import Head from 'next/head';
 
-import injectSheet from 'react-jss'
-
 import registerServiceWorker from '../src/registerServiceWorker';
-// import I18n from '../src/i18n'
-import Title from '../src/components/Title/Title';
-import withStore from '../lib/withStore';
-import GlobalStore from '../src/alt/stores/GlobalStore';
-import { isServer } from '../src/settings/const';
 
-const styles = {
-  '@global html, @global body': {
-    fontFamily: 'Roboto, serif',
-    fontSize: '10px',
-    margin: 0,
-    padding: 0,
-  },
-};
+import '../static/styles/app.scss';
 
 class MyApp extends App {
-  componentDidMount() {
-    if (!isServer()) {
-      const style = document.getElementById('server-side-styles');
-
-      if (style) {
-        style.parentNode.removeChild(style)
-      }
-    }
-  }
-
   render() {
     const { Component, pageProps } = this.props;
     return (
@@ -67,7 +43,6 @@ class MyApp extends App {
 
           <script async src="//www.googletagmanager.com/gtag/js?id=UA-86301706-1" />
 
-          <Title />
           <meta name="description" content="FCG" />
           <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -83,8 +58,6 @@ class MyApp extends App {
   }
 }
 
-// const I18nApp = I18n.appWithTranslation(MyApp);
-const StyledApp = injectSheet(styles)(MyApp);
-export default withStore(StyledApp, [GlobalStore]);
+export default MyApp;
 
 registerServiceWorker();

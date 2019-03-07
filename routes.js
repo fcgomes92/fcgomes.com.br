@@ -2,28 +2,12 @@ const routes = require('next-routes');
 
 const URLS = {
   base: () => `/`,
-  about: () => `/about`,
-  blogList: () => `/blog`,
-  blogListPage: (page = 1) => `/blog?page=${page}`,
-  blogDetail: (postId = ':postId') => `/blog/${postId}`,
 };
 
 const ROUTES = {
   HOME: {
     path: URLS.base(),
     name: 'index',
-  },
-  ABOUT: {
-    path: URLS.about(),
-    name: 'about',
-  },
-  BLOG_POSTS_LIST: {
-    path: URLS.blogList(),
-    name: 'blogList',
-  },
-  BLOG_POSTS_DETAIL: {
-    path: URLS.blogDetail(),
-    name: 'blogDetail',
   },
   NOT_FOUND: {
     path: '/404',

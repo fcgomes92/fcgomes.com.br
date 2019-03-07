@@ -1,90 +1,27 @@
 import React from 'react';
 
-import Head from 'next/head';
+import '../static/styles/index.scss';
 
-import connectToStores from 'alt-utils/lib/connectToStores'
-
-import Header from '../src/components/Header/Header';
-import Title from '../src/components/Title/Title';
-import GlobalActions from '../src/alt/actions/GlobalActions';
-import GlobalStore from '../src/alt/stores/GlobalStore';
-import LoaderComponent from '../src/components/Loader/LoaderComponent';
-import { isServer } from '../src/settings/const';
-
-class _IsolatedComponent extends React.Component {
-  state = {};
-
-  static getStores = () => [GlobalStore];
-
-  static getPropsFromStores = () => GlobalStore.getState();
-
-  renderPostLine = (movieId, idx) => {
-    const movie = this.props.films.items[movieId];
-    return (
-      <li key={idx}>{movie.title}</li>
-    )
-  };
-
-  render() {
-    if (this.props.loading) {
-      return <LoaderComponent />
-    }
-    return (
-      <>
-        <p>Movies:</p>
-        <ul>
-          {this.props.films.ids.map(this.renderPostLine)}
-        </ul>
-        <pre>
-          {JSON.stringify(this.props, null, 2)}
-        </pre>
-      </>
-    )
-  }
-}
-
-const IC = connectToStores(_IsolatedComponent);
-
-
-class Index extends React.Component {
-  static async getInitialProps() {
-    const _isServer = isServer();
-    if (_isServer) {
-      await GlobalActions.fetchFilms();
-    }
-    return {
-      serverInitialized: _isServer,
-      namespacesRequired: ['common'],
-    }
-  }
-
-  state = {
-    loadingFilms: false,
-  };
-
-  componentDidMount() {
-    if (!this.props.serverInitialized) {
-      this.handleFetchData();
-    }
-  }
-
-  handleFetchData = async () => {
-    await this.setState({ loadingFilms: true });
-    await GlobalActions.fetchFilms();
-    await this.setState({ loadingFilms: false });
-  };
-
+export default class Index extends React.PureComponent {
   render() {
     return (
       <>
-        <Head>
-          <Title title="HOME" />
-        </Head>
-        <Header />
-        <IC loading={this.state.loadingFilms} />
+        <label className="header-menu">
+          <input type="checkbox" className="header-menu__input" />
+          <div className="header-menu__button">
+            <div className="header-menu__button__line header-menu__button__line--line-1" />
+            <div className="header-menu__button__line header-menu__button__line--line-2" />
+            <div className="header-menu__button__line header-menu__button__line--line-3" />
+          </div>
+          <ul className="header-menu__items">
+            <li className="header-menu__items__item"><a className="link" href="google.com">HOME</a></li>
+            <li className="header-menu__items__item"><a className="link" href="google.com">PROJECT</a></li>
+            <li className="header-menu__items__item"><a className="link" href="google.com">ABOUT</a></li>
+          </ul>
+        </label>
+        <section className="section">
+        </section>
       </>
     );
   }
 }
-
-export default Index;

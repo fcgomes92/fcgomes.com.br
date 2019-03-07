@@ -1,0 +1,166 @@
+$transitionTime: .5s;
+$buttonColor: #333;
+$menuColor: red;
+
+.header-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  display: flex;
+  margin: 2rem;
+  cursor: pointer;
+
+  &__items {
+    z-index: 1;
+    position: fixed;
+    top: 50%;
+    left: -100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transform: translateY(-50%);
+    transition: all $transitionTime ease-in-out;
+
+    &__item {
+      margin: 2rem;
+      line-height: 200%;
+      font-size: 3.6rem;
+      position: relative;
+
+      &:before {
+        left: -30rem;
+        content: "";
+        position: absolute;
+        bottom: 14%;
+        height: 2rem;
+        opacity: .75;
+        width: 85%;
+        transform: skew(30deg,-2deg);
+        background-color: yellow;
+        z-index: -1;
+        transition: all $transitionTime ease-in-out;
+      }
+
+      &:hover {
+        &:before {
+          left: 10%;
+        }
+      }
+    }
+  }
+
+  &__button {
+    position: relative;
+    height: 4rem;
+    width: 4rem;
+    transition: all .5s ease-in-out;
+
+    &:before {
+      transition: all .5s ease-in-out;
+      top: 0;
+      right: calc(100vw - 4rem);
+      content: "";
+      position: fixed;
+      background-color: $menuColor;
+      height: 100vh;
+      width: 100vw;
+      transform: skewX(-15deg);
+    }
+
+
+    &__line {
+      height: .2rem;
+      width: 4rem;
+      background-color: $buttonColor;
+      position: absolute;
+      transition: transform $transitionTime, bottom $transitionTime $transitionTime/2, top $transitionTime $transitionTime/2;
+
+      &--line-1 {
+        top: 1rem;
+      }
+
+      &--line-2 {
+        top: 1.9rem;
+      }
+
+      &--line-3 {
+        bottom: 1rem;
+      }
+    }
+  }
+
+  &__input {
+    display: none;
+    visibility: hidden;
+    z-index: -99;
+
+    &:checked + .header-menu__button {
+      &:before {
+        right: 0;
+        transform: skewX(0);
+      }
+
+      .header-menu__button__line {
+        &--line-1 {
+          top: 1.9rem;
+          transform: rotate(45deg);
+          transition: transform $transitionTime $transitionTime/2, top $transitionTime;
+        }
+
+        &--line-2 {
+          top: 1.9rem;
+          transform: scaleX(0);
+        }
+
+        &--line-3 {
+          bottom: 1.9rem;
+          transform: rotate(-45deg);
+          transition: transform $transitionTime $transitionTime/2, bottom $transitionTime;
+        }
+      }
+    }
+
+    &:checked ~ .header-menu__items {
+      left: 0;
+      transition: all $transitionTime ease-in-out;
+    }
+  }
+}
+
+.section {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: blue;
+}
+
+.link {
+  text-decoration: none;
+  color: #333;
+}
+
+@media (min-width: 32rem) {
+  .header-menu {
+    &__input {
+      &:checked + .header-menu__button {
+        &:before {
+          right: 50%;
+          transform: skewX(-20deg);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 64rem) {
+  .header-menu {
+    &__input {
+      &:checked + .header-menu__button {
+        &:before {
+          right: 60%;
+          transform: skewX(-25deg);
+        }
+      }
+    }
+  }
+}
