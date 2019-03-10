@@ -14,12 +14,25 @@ export default class Index extends React.PureComponent {
             <div className="header-menu__button__line header-menu__button__line--line-3" />
           </div>
           <ul className="header-menu__items">
-            <li className="header-menu__items__item"><a className="link" href="google.com">HOME</a></li>
-            <li className="header-menu__items__item"><a className="link" href="google.com">PROJECT</a></li>
-            <li className="header-menu__items__item"><a className="link" href="google.com">ABOUT</a></li>
+            <li className="header-menu__items__item"><a className="link" href="#home">HOME</a></li>
+            <li className="header-menu__items__item"><a className="link" href="#projects">PROJECTS</a></li>
+            <li className="header-menu__items__item"><a className="link" href="#about">ABOUT</a></li>
+            <li className="header-menu__items__item"><a className="link" href="#contacts">CONTACTS</a></li>
           </ul>
         </label>
-        <section className="section">
+        <section className="section home" id="home">
+          <div className="home__banner">
+            BEM-VINDO!
+          </div>
+        </section>
+        <section className="section" id="projects">
+
+        </section>
+        <section className="section" id="about">
+
+        </section>
+        <section className="section" id="contacts">
+
         </section>
       </>
     );

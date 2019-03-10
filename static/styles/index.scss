@@ -1,4 +1,4 @@
-$transitionTime: .5s;
+$transitionTime: .2s;
 $buttonColor: #333;
 $menuColor: red;
 
@@ -36,7 +36,7 @@ $menuColor: red;
         height: 2rem;
         opacity: .75;
         width: 85%;
-        transform: skew(30deg,-2deg);
+        transform: skew(30deg, -2deg);
         background-color: yellow;
         z-index: -1;
         transition: all $transitionTime ease-in-out;
@@ -130,8 +130,24 @@ $menuColor: red;
 
 .section {
   min-height: 100vh;
-  width: 100vw;
-  background-color: blue;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.home {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+
+  &__banner {
+    text-align: center;
+    color: white;
+    line-height: 200%;
+    font-size: 2rem;
+    position: relative;
+    background-color: blue;
+  }
 }
 
 .link {
@@ -150,6 +166,9 @@ $menuColor: red;
       }
     }
   }
+  .section {
+    //padding-left: 6%;
+  }
 }
 
 @media (min-width: 64rem) {
@@ -162,5 +181,9 @@ $menuColor: red;
         }
       }
     }
+  }
+
+  .section {
+    //padding-left: 6%;
   }
 }
