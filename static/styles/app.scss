@@ -4,3 +4,30 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+.section {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.home {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+
+  &__banner {
+    text-align: center;
+    color: white;
+    line-height: 200%;
+    font-size: 2rem;
+    position: relative;
+    background-color: blue;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: #333;
+}

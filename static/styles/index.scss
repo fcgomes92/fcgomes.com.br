@@ -128,33 +128,6 @@ $menuColor: red;
   }
 }
 
-.section {
-  min-height: 100vh;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.home {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  flex-direction: column;
-
-  &__banner {
-    text-align: center;
-    color: white;
-    line-height: 200%;
-    font-size: 2rem;
-    position: relative;
-    background-color: blue;
-  }
-}
-
-.link {
-  text-decoration: none;
-  color: #333;
-}
-
 @media (min-width: 32rem) {
   .header-menu {
     &__input {
@@ -165,9 +138,6 @@ $menuColor: red;
         }
       }
     }
-  }
-  .section {
-    //padding-left: 6%;
   }
 }
 
@@ -181,9 +151,5 @@ $menuColor: red;
         }
       }
     }
-  }
-
-  .section {
-    //padding-left: 6%;
   }
 }
