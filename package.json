@@ -1,65 +1,31 @@
 {
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fcgomes92/fcgomes.com.git"
-  },
-  "bugs": {
-    "url": "https://github.com/fcgomes92/fcgomes.com/issues"
-  },
-  "author": "Fernando Gomes <fcgomes.92@gmail.com> (http://fcgomes.com)",
-  "license": "MIT",
+  "name": "fcgomes.com",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "animate.css": "^3.5.2",
-    "classnames": "^2.2.5",
-    "i18next": "^10.2.1",
-    "i18next-browser-languagedetector": "^2.1.0",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-i18next": "^7.0.2",
-    "react-paginate": "^5.0.0",
-    "react-redux": "^5.0.6",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17",
-    "react-toolbox": "^2.0.0-beta.12",
-    "react-transition-group": "^2.2.1",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "whatwg-fetch": "^2.0.3"
-  },
-  "devDependencies": {
-    "node-sass-chokidar": "0.0.3",
-    "npm-run-all": "^4.0.2",
-    "react-toolbox-themr": "^1.0.2",
-    "redux-logger": "^3.0.6"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.0"
   },
   "scripts": {
-    "start-js": "react-scripts start",
-    "eject": "react-scripts eject",
-    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
-    "deploy": "npm run build && firebase deploy",
-    "test": "node scripts/test.js --env=jsdom",
-    "toolbox": "react-toolbox-themr"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "reactToolbox": {
-    "customProperties": {
-      "animation-duration": "0.3s",
-      "color-primary": "#673ab7",
-      "color-primary-dark": "#320b86",
-      "color-primary-light": "#9a67ea",
-      "color-accent": "#ffeb3b",
-      "color-accent-dark": "#c8b900",
-      "color-accent-light": "#ffff72",
-      "color-text": "#ffffff",
-      "color-text-secondary": "#000000"
-    },
-    "output": "src/assets/react-toolbox"
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
