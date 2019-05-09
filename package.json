@@ -2,10 +2,14 @@
   "name": "fcgomes.com",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": false,
   "dependencies": {
+    "@rmwc/button": "^5.3.1",
+    "@rmwc/provider": "^5.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "react-scripts": "3.0.0",
+    "recompose": "^0.30.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,5 +31,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.14",
+    "prop-types": "^15.7.2",
+    "react-jss": "^8.6.1",
+    "typescript": "^3.4.5"
   }
 }
